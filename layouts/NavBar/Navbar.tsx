@@ -1,7 +1,8 @@
-import { Avatar, Flex } from '@chakra-ui/react';
-import React from 'react';
-import styles from './navbar.module.scss';
-import BreadcrumbComp from '../Breadcrumb/Breadcrumb';
+import { Avatar, Flex } from '@chakra-ui/react'
+import React from 'react'
+
+import BreadcrumbComp from '../Breadcrumb/Breadcrumb'
+import styles from './navbar.module.scss'
 
 export default function NavBar() {
     return (

@@ -1,10 +1,11 @@
-import { Flex } from '@chakra-ui/layout';
-import React, { ReactNode } from 'react';
-import NavBar from './NavBar/Navbar';
-import Sidebar from './Sidebar/Sidebar';
-import styles from './mainLayout.module.scss';
+import { Flex } from '@chakra-ui/layout'
+import React, { ReactNode } from 'react'
 
-export default function MainLayout({ children }: {children: ReactNode}) {
+import NavBar from './NavBar/Navbar'
+import Sidebar from './Sidebar/Sidebar'
+import styles from './mainLayout.module.scss'
+
+export default function MainLayout({ children }: { children: ReactNode }) {
     return (
         <>
             <Sidebar />
