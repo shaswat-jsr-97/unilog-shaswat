@@ -1,0 +1,39 @@
+.Sidebar {
+    background-color: var(--chakra-colors-gray-700);
+    min-height: calc(100vh);
+    width: var(--chakra-sizes-16);
+    border-right: 1px solid var(--chakra-colors-gray-300);
+    transition: all 0.15s cubic-bezier(0,1.12,.84,1.04);
+
+    &.expanded {
+        max-width: var(--chakra-sizes-16);
+    }
+
+    &:hover {
+        width: 20%;
+
+        .menuItem {
+            .title {
+                display: inline-block;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.menuItem {
+    display:block;
+    width:100%;
+    &:hover {
+        background-color: var(--chakra-colors-gray-400);
+    }
+    .title {
+        line-height: 1;
+        display:none;
+        opacity: 0;
+    }
+}
+
+.logo {
+    margin-bottom: 1rem;
+}
