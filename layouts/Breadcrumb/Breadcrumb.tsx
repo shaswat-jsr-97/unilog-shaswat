@@ -1,6 +1,5 @@
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
-import React from 'react'
 
 export default function BreadcrumbComp() {
     return (

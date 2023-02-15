@@ -1,5 +1,4 @@
 import { Flex, Icon, Text } from '@chakra-ui/react'
-import React from 'react'
 import { HiOutlineDocument } from 'react-icons/hi'
 import { IoMdSettings } from 'react-icons/io'
 import { IoLogoOctocat } from 'react-icons/io'
