@@ -1,10 +1,10 @@
-import { Flex, Icon, Text,  } from '@chakra-ui/react'
+import { Flex, Icon, Text } from '@chakra-ui/react'
+import Link from 'next/link'
 import React from 'react'
 import { HiOutlineDocument } from 'react-icons/hi'
 import { IoMdSettings } from 'react-icons/io'
 import { IoLogoOctocat } from 'react-icons/io'
 import { RxDashboard } from 'react-icons/rx'
-import Link from 'next/link';
 
 import styles from './sidebar.module.scss'
 
