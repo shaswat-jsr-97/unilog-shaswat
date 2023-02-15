@@ -17,7 +17,7 @@ module.exports = {
         'next/core-web-vitals',
         'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
         'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-        'plugin:prettier/recommended',
+        'prettier',
     ],
     rules: {
         // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
