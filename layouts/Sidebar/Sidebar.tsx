@@ -12,7 +12,10 @@ export default function Sidebar() {
     return (
         
         <Flex flexDir="column" className={`${styles.Sidebar} expanded`} px={4} position="absolute" align="flex-start">
-            <Icon color="white" as={IoLogoOctocat} fontSize={`32px`} mt={2} className={styles.logo} />
+            <Flex align="center" gap={2}>
+                <Icon color="white" as={IoLogoOctocat} fontSize={`32px`} mt={2} className={styles.logo} />
+                <Text className={styles.logoName} as="span" fontWeight="bold" color="white"><Link href="/">Unilog</Link></Text>
+            </Flex>
             <Accordion allowToggle w={`100%`}>
             <AccordionItem border="0">
                     <AccordionButton p={0} className={styles.menuItem} _hover={{bgColor: 'gray.800'}}>
@@ -28,11 +31,11 @@ export default function Sidebar() {
                         <AccordionIcon color="white"/>
                     </Flex>
                     </AccordionButton>
-                    <AccordionPanel>
+                    <AccordionPanel className={styles.submenuContainer}>
                     <Flex flexDir="column" ps={9}>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Dashboard Item 1</Text></Link>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Dashboard Item 2</Text></Link>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Dashboard Item 3</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Dashboard Item 1</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Dashboard Item 2</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Dashboard Item 3</Text></Link>
                     </Flex>
                     </AccordionPanel>
                 </AccordionItem>
@@ -50,11 +53,11 @@ export default function Sidebar() {
                         <AccordionIcon color="white"/>
                     </Flex> */}
                     </AccordionButton>
-                    {/* <AccordionPanel>
+                    {/* <AccordionPanel className={styles.submenuContainer}>
                     <Flex flexDir="column" ps={9}>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Submenu Item 1</Text></Link>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Submenu Item 1</Text></Link>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Submenu Item 1</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Submenu Item 1</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Submenu Item 1</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Submenu Item 1</Text></Link>
                     </Flex>
                     </AccordionPanel> */}
                 </AccordionItem>
@@ -72,11 +75,11 @@ export default function Sidebar() {
                         <AccordionIcon color="white"/>
                     </Flex>
                     </AccordionButton>
-                    <AccordionPanel>
+                    <AccordionPanel className={styles.submenuContainer}>
                     <Flex flexDir="column" ps={9}>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Settings Item 1</Text></Link>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Settings Item 2</Text></Link>
-                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Settings Item 3</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Settings Item 1</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Settings Item 2</Text></Link>
+                        <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Settings Item 3</Text></Link>
                     </Flex>
                     </AccordionPanel>
                 </AccordionItem>
@@ -93,9 +96,9 @@ export default function Sidebar() {
                 
             </Flex>
             <Flex flexDir="column" ps={9}>
-                <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Submenu Item 1</Text></Link>
-                <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Submenu Item 1</Text></Link>
-                <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white">Submenu Item 1</Text></Link>
+                <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Submenu Item 1</Text></Link>
+                <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Submenu Item 1</Text></Link>
+                <Link href={'#'}><Text my={2} as="p" fontSize="xs" color="white" className={styles.submenuItem}>Submenu Item 1</Text></Link>
             </Flex>
             <Link href="/ndr" className={styles.menuLink}>
                 <Flex className={styles.menuItem} py={3} borderRadius={4} px={2} align="center" gap={2}>
