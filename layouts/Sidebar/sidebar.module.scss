@@ -24,15 +24,24 @@
 .menuItem {
     display: block;
     width: 100%;
+    border-radius: var(--chakra-sizes-1);
     &:hover {
-        background-color: var(--chakra-colors-gray-400);
+        background-color: var(--chakra-colors-gray-800);
     }
     .title {
         line-height: 1;
         display: none;
-        opacity: 0;
     }
 }
+.menuToggle {
+    cursor: pointer;
+    border-top-right-radius: var(--chakra-sizes-1);
+    border-bottom-right-radius: var(--chakra-sizes-1);
+    &:active {
+        background-color: var(--chakra-colors-gray-900);
+    }
+}
+
 .menuLink {
     display: block;
     width: 100%;
