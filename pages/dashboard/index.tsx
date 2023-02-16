@@ -1,15 +1,15 @@
 import { Card, CardBody, CardHeader, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import React from 'react'
 
-import styles from './dashboard.module.scss'
+import DashboardCouriers from './components/Courier'
+import DashboardDelays from './components/Delays'
+import DashboardNDR from './components/NDR'
 import DashboardOrders from './components/Orders'
 import DashboardOverview from './components/Overview'
-import DashboardShipments from './components/Shipments'
-import DashboardNDR from './components/NDR'
 import DashboardRTO from './components/RTO'
-import DashboardDelays from './components/Delays'
+import DashboardShipments from './components/Shipments'
 import DashboardTracking from './components/Tracking'
-import DashboardCouriers from './components/Courier'
+import styles from './dashboard.module.scss'
 
 export default function DashboardPage() {
     return (
@@ -20,36 +20,76 @@ export default function DashboardPage() {
                 </Heading>
             </CardHeader>
             <CardBody>
-                <Tabs isFitted className={styles.dashboardTabsContainer} color="gray.700">
+                <Tabs isLazy isFitted className={styles.dashboardTabsContainer} color="gray.700">
                     <TabList>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             Overview
                         </Tab>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             Orders
                         </Tab>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             Shipments
                         </Tab>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             NDR
                         </Tab>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             RTO
                         </Tab>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             Courier
                         </Tab>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             Delays
                         </Tab>
-                        <Tab className={styles.dashboardTab} fontSize="sm" _selected={{color: 'blue.400', borderColor: 'blue.400' }} fontWeight="bold">
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                        >
                             Tracking
                         </Tab>
                     </TabList>
 
                     <TabPanels className={styles.dashboardTabPanel}>
-                    <TabPanel>
+                        <TabPanel>
                             <DashboardOverview />
                         </TabPanel>
                         <TabPanel>
@@ -73,7 +113,6 @@ export default function DashboardPage() {
                         <TabPanel>
                             <DashboardTracking />
                         </TabPanel>
-                        
                     </TabPanels>
                 </Tabs>
             </CardBody>
