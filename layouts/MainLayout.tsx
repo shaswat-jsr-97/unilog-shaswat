@@ -11,8 +11,12 @@ export default function MainLayout({ children }: { children: ReactNode }) {
             <Sidebar />
             <Flex className={styles.layout} flexDir="column">
                 <NavBar />
+                <Flex className={styles.contentArea} ps={2}>
+                    <Flex className={styles.pageContainer} flexGrow={1} p={4}>
+                        {children}
+                    </Flex>
+                </Flex>
             </Flex>
-            {children}
         </>
     )
 }
