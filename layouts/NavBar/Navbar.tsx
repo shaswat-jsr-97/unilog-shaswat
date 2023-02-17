@@ -1,4 +1,5 @@
-import { Avatar, Flex } from '@chakra-ui/react'
+import { ChevronDownIcon } from '@chakra-ui/icons'
+import { Avatar, Flex, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import React from 'react'
 
 import BreadcrumbComp from '../Breadcrumb/Breadcrumb'
@@ -10,7 +11,17 @@ export default function NavBar() {
             <Flex className={styles.leftSide} align="center">
                 <BreadcrumbComp />
             </Flex>
-            <Avatar size="xs"></Avatar>
+            <Menu>
+                <MenuButton>
+                    <Avatar size="xs"></Avatar>
+                    <ChevronDownIcon color="gray.500"/>
+                </MenuButton>
+                <MenuList>
+                    <MenuItem fontSize="sm">Settings</MenuItem>
+                    <MenuItem fontSize="sm">User Info</MenuItem>
+                    <MenuItem fontSize="sm">Logout</MenuItem>
+                </MenuList>
+            </Menu>
         </Flex>
     )
 }
