@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/layout'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 import NavBar from './NavBar/Navbar'
 import Sidebar from './Sidebar/Sidebar'
