@@ -1,5 +1,24 @@
-import { Box, Card, CardBody, CardHeader, Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList, Tab, TabList, TabPanel, TabPanels, Tabs, Tooltip } from '@chakra-ui/react'
+import {
+    Box,
+    Card,
+    CardBody,
+    CardHeader,
+    Flex,
+    Heading,
+    IconButton,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    Tooltip,
+} from '@chakra-ui/react'
 import React from 'react'
+import toast from 'react-hot-toast'
 import { FaEllipsisV } from 'react-icons/fa'
 import { FiRefreshCw } from 'react-icons/fi'
 
@@ -12,39 +31,37 @@ import DashboardRTO from './components/RTO'
 import DashboardShipments from './components/Shipments'
 import DashboardTracking from './components/Tracking'
 import styles from './dashboard.module.scss'
-import toast from 'react-hot-toast';
-
 
 export default function DashboardPage() {
     const handleRefresh = () => {
-        return toast("Refreshing...")
+        return toast('Refreshing...')
     }
     return (
         <Card w={`100%`}>
             <CardHeader pb={0}>
                 <Flex flexDir="row" align={`center`} justify={`space-between`}>
                     <Heading size="md" color="gray.900">
-                            Dashboard
+                        Dashboard
                     </Heading>
                     <Box>
                         <Tooltip label="Refresh" hasArrow>
-                            <IconButton aria-label={'Refresh'} icon={<FiRefreshCw />} onClick={handleRefresh}/>
+                            <IconButton aria-label={'Refresh'} icon={<FiRefreshCw />} onClick={handleRefresh} />
                         </Tooltip>
-                            <Menu>
-                                    <Tooltip label="More options" hasArrow placement="bottom-end">
+                        <Menu>
+                            <Tooltip label="More options" hasArrow placement="bottom-end">
                                 <MenuButton>
-                                        <IconButton ms={4} aria-label={'Refresh'} icon={<FaEllipsisV />}/>
+                                    <IconButton ms={4} aria-label={'Refresh'} icon={<FaEllipsisV />} />
                                 </MenuButton>
-                                    </Tooltip>
-                                <MenuList>
-                                    <MenuItem fontSize="sm">Export as CSV</MenuItem>
-                                </MenuList>
-                            </Menu>
+                            </Tooltip>
+                            <MenuList>
+                                <MenuItem fontSize="sm">Export as CSV</MenuItem>
+                            </MenuList>
+                        </Menu>
                     </Box>
                 </Flex>
             </CardHeader>
             <CardBody>
-                <Tabs  isFitted className={styles.dashboardTabsContainer} color="gray.700">
+                <Tabs isFitted className={styles.dashboardTabsContainer} color="gray.700">
                     <TabList>
                         <Tab
                             className={styles.dashboardTab}

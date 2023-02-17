@@ -4,10 +4,10 @@ import router from 'next/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { useEffect } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 import MainLayout from '../layouts/MainLayout'
 import '../styles/globals.css'
-import { Toaster } from 'react-hot-toast';
 
 NProgress.configure({ showSpinner: false })
 
@@ -30,9 +30,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return (
         <ChakraProvider resetCSS={true}>
-            <Toaster toastOptions={{
-                className: 'default-toast'
-            }}/>
+            <Toaster
+                toastOptions={{
+                    className: 'default-toast',
+                }}
+            />
             <MainLayout>
                 <Component {...pageProps} />
             </MainLayout>

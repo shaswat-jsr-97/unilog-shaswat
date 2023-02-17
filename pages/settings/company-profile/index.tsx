@@ -1,4 +1,4 @@
-import { Card, CardHeader, Divider, Heading, Text } from "@chakra-ui/react";
+import { Card, CardHeader, Divider, Heading, Text } from '@chakra-ui/react'
 
 export default function CompanyProfile() {
     return (
@@ -12,6 +12,6 @@ export default function CompanyProfile() {
                 </Text>
             </CardHeader>
             <Divider />
-            </Card>
+        </Card>
     )
 }
