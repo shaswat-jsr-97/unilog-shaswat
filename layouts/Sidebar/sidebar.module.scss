@@ -2,8 +2,10 @@
     background-color: var(--chakra-colors-gray-700);
     min-height: calc(100vh);
     width: var(--chakra-sizes-16);
+    overflow: hidden;
     border-right: 1px solid var(--chakra-colors-gray-300);
     transition: all 0.15s cubic-bezier(0, 1.12, 0.84, 1.04);
+    z-index: 3;
 
     &.expanded {
         max-width: var(--chakra-sizes-16);
@@ -11,6 +13,14 @@
 
     &:hover {
         width: 20%;
+
+        .logoName {
+            display: inline-block;
+        }
+
+        .submenuContainer {
+            display: block;
+        }
 
         .menuItem {
             .title {
@@ -33,6 +43,11 @@
         display: none;
     }
 }
+.submenuItem {
+    &:hover {
+        text-decoration: underline;
+    }
+}
 .menuToggle {
     cursor: pointer;
     border-top-right-radius: var(--chakra-sizes-1);
@@ -42,6 +57,10 @@
     }
 }
 
+.submenuContainer {
+    display: none;
+}
+
 .menuLink {
     display: block;
     width: 100%;
@@ -49,4 +68,8 @@
 
 .logo {
     margin-bottom: 1rem;
+}
+
+.logoName {
+    display: none;
 }

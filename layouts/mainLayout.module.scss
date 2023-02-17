@@ -2,4 +2,15 @@
     min-width: 100vw;
     min-height: 100vh;
     padding-left: var(--chakra-sizes-14);
+    background-color: var(--chakra-colors-white);
+    height: calc(100vh - var(--chakra-sizes-12));
+    z-index: 1;
+}
+
+.contentArea {
+    height: calc(100vh - var(--chakra-sizes-12));
+}
+
+.pageContainer {
+    background-color: var(--chakra-colors-gray-100);
 }
