@@ -14,7 +14,7 @@ export default function NavBar() {
             <Menu>
                 <MenuButton>
                     <Avatar size="xs"></Avatar>
-                    <ChevronDownIcon color="gray.500"/>
+                    <ChevronDownIcon color="gray.500" />
                 </MenuButton>
                 <MenuList>
                     <MenuItem fontSize="sm">Settings</MenuItem>

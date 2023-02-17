@@ -21,9 +21,9 @@ export default function SettingsPage() {
                 </Text>
             </CardHeader>
             <Divider />
-            <CardBody>
-                <Flex gap={4}>
-                    <Card w={`25%`}>
+            <CardBody overflow={`auto`}>
+                <Flex gap={4} flexWrap={`wrap`} flexBasis={`25%`}>
+                    <Card w={`25%`} flex="1 0 21%">
                         <CardHeader>
                             <Flex flexDir="row" gap={4} align="center">
                                 <Icon as={GiOrganigram} fontSize="lg" />
@@ -37,7 +37,7 @@ export default function SettingsPage() {
                             <List>
                                 <ListItem>
                                     <Flex align="center" justifyContent="space-between" className={styles.link}>
-                                        <Link href="#">
+                                        <Link href="/settings/company-profile">
                                             <Text as="span" fontSize="sm">
                                                 Company Profile
                                             </Text>
@@ -78,7 +78,172 @@ export default function SettingsPage() {
                             </List>
                         </CardBody>
                     </Card>
-                    <Card w={`25%`}>
+                    <Card w={`25%`} flex="1 0 21%">
+                        <CardHeader>
+                            <Flex flexDir="row" gap={4} align="center">
+                                <Icon as={GiOrganigram} fontSize="lg" />
+                                <Text as="span" fontSize="sm" fontWeight="bold">
+                                    Company
+                                </Text>
+                            </Flex>
+                        </CardHeader>
+                        <Divider />
+                        <CardBody>
+                            <List>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" className={styles.link}>
+                                        <Link href="/settings/company-profile">
+                                            <Text as="span" fontSize="sm">
+                                                Company Profile
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                KYC
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                KYC International
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                Change Password
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                            </List>
+                        </CardBody>
+                    </Card>
+                    <Card w={`25%`} flex="1 0 21%">
+                        <CardHeader>
+                            <Flex flexDir="row" gap={4} align="center">
+                                <Icon as={GiOrganigram} fontSize="lg" />
+                                <Text as="span" fontSize="sm" fontWeight="bold">
+                                    Company
+                                </Text>
+                            </Flex>
+                        </CardHeader>
+                        <Divider />
+                        <CardBody>
+                            <List>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" className={styles.link}>
+                                        <Link href="/settings/company-profile">
+                                            <Text as="span" fontSize="sm">
+                                                Company Profile
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                KYC
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                KYC International
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                Change Password
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                            </List>
+                        </CardBody>
+                    </Card>
+                    <Card w={`25%`} flex="1 0 21%">
+                        <CardHeader>
+                            <Flex flexDir="row" gap={4} align="center">
+                                <Icon as={GiOrganigram} fontSize="lg" />
+                                <Text as="span" fontSize="sm" fontWeight="bold">
+                                    Company
+                                </Text>
+                            </Flex>
+                        </CardHeader>
+                        <Divider />
+                        <CardBody>
+                            <List>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" className={styles.link}>
+                                        <Link href="/settings/company-profile">
+                                            <Text as="span" fontSize="sm">
+                                                Company Profile
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                KYC
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                KYC International
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                                <ListItem>
+                                    <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
+                                        <Link href="#">
+                                            <Text as="span" fontSize="sm">
+                                                Change Password
+                                            </Text>
+                                        </Link>
+                                        <ChevronRightIcon fontSize="sm" />
+                                    </Flex>
+                                </ListItem>
+                            </List>
+                        </CardBody>
+                    </Card>
+                    <Card w={`25%`} flex="1 0 21%">
                         <CardHeader>
                             <Flex flexDir="row" gap={4} align="center">
                                 <Icon as={FaTruckPickup} fontSize="lg" />
@@ -103,7 +268,7 @@ export default function SettingsPage() {
                             </List>
                         </CardBody>
                     </Card>
-                    <Card w={`25%`}>
+                    <Card w={`25%`} flex="1 0 21%">
                         <CardHeader>
                             <Flex flexDir="row" gap={4} align="center">
                                 <Icon as={BsCash} fontSize="lg" />
@@ -142,7 +307,7 @@ export default function SettingsPage() {
                             </List>
                         </CardBody>
                     </Card>
-                    <Card w={`25%`}>
+                    <Card w={`25%`} flex="1 0 21%">
                         <CardHeader>
                             <Flex flexDir="row" gap={4}>
                                 <Icon as={TbFileInvoice} fontSize="lg" />

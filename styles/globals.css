@@ -16,3 +16,7 @@ a {
 * {
     box-sizing: border-box;
 }
+
+.default-toast {
+    font-size: var(--chakra-fontSizes-sm);
+}

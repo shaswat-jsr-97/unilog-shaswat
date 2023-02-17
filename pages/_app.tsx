@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 
 import MainLayout from '../layouts/MainLayout'
 import '../styles/globals.css'
+import { Toaster } from 'react-hot-toast';
 
 NProgress.configure({ showSpinner: false })
 
@@ -29,6 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return (
         <ChakraProvider resetCSS={true}>
+            <Toaster toastOptions={{
+                className: 'default-toast'
+            }}/>
             <MainLayout>
                 <Component {...pageProps} />
             </MainLayout>

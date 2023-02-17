@@ -1,5 +1,7 @@
-import { Card, CardBody, CardHeader, Heading, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { Box, Card, CardBody, CardHeader, Flex, Heading, IconButton, Menu, MenuButton, MenuItem, MenuList, Tab, TabList, TabPanel, TabPanels, Tabs, Tooltip } from '@chakra-ui/react'
 import React from 'react'
+import { FaEllipsisV } from 'react-icons/fa'
+import { FiRefreshCw } from 'react-icons/fi'
 
 import DashboardCouriers from './components/Courier'
 import DashboardDelays from './components/Delays'
@@ -10,17 +12,39 @@ import DashboardRTO from './components/RTO'
 import DashboardShipments from './components/Shipments'
 import DashboardTracking from './components/Tracking'
 import styles from './dashboard.module.scss'
+import toast from 'react-hot-toast';
+
 
 export default function DashboardPage() {
+    const handleRefresh = () => {
+        return toast("Refreshing...")
+    }
     return (
         <Card w={`100%`}>
             <CardHeader pb={0}>
-                <Heading size="md" color="gray.900">
-                    Dashboard
-                </Heading>
+                <Flex flexDir="row" align={`center`} justify={`space-between`}>
+                    <Heading size="md" color="gray.900">
+                            Dashboard
+                    </Heading>
+                    <Box>
+                        <Tooltip label="Refresh" hasArrow>
+                            <IconButton aria-label={'Refresh'} icon={<FiRefreshCw />} onClick={handleRefresh}/>
+                        </Tooltip>
+                            <Menu>
+                                    <Tooltip label="More options" hasArrow placement="bottom-end">
+                                <MenuButton>
+                                        <IconButton ms={4} aria-label={'Refresh'} icon={<FaEllipsisV />}/>
+                                </MenuButton>
+                                    </Tooltip>
+                                <MenuList>
+                                    <MenuItem fontSize="sm">Export as CSV</MenuItem>
+                                </MenuList>
+                            </Menu>
+                    </Box>
+                </Flex>
             </CardHeader>
             <CardBody>
-                <Tabs isLazy isFitted className={styles.dashboardTabsContainer} color="gray.700">
+                <Tabs  isFitted className={styles.dashboardTabsContainer} color="gray.700">
                     <TabList>
                         <Tab
                             className={styles.dashboardTab}
