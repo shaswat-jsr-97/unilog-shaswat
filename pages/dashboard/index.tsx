@@ -40,7 +40,12 @@ export default function DashboardPage() {
                     </Heading>
                     <Box>
                         <Tooltip label="Refresh" hasArrow>
-                            <IconButton size="sm" aria-label={'Refresh'} icon={<FiRefreshCw />} onClick={handleRefresh} />
+                            <IconButton
+                                size="sm"
+                                aria-label={'Refresh'}
+                                icon={<FiRefreshCw />}
+                                onClick={handleRefresh}
+                            />
                         </Tooltip>
                     </Box>
                 </Flex>
