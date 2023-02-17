@@ -37,7 +37,7 @@ export default function SettingsPage() {
                             <List>
                                 <ListItem>
                                     <Flex align="center" justifyContent="space-between" className={styles.link}>
-                                        <Link href="/settings/company-profile">
+                                        <Link href="/settings/companyProfile" title="Company Profile">
                                             <Text as="span" fontSize="sm">
                                                 Company Profile
                                             </Text>
