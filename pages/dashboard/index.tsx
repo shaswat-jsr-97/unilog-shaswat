@@ -6,10 +6,6 @@ import {
     Flex,
     Heading,
     IconButton,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
     Tab,
     TabList,
     TabPanel,
@@ -19,7 +15,6 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import toast from 'react-hot-toast'
-import { FaEllipsisV } from 'react-icons/fa'
 import { FiRefreshCw } from 'react-icons/fi'
 
 import DashboardCouriers from './components/Courier'
@@ -45,23 +40,13 @@ export default function DashboardPage() {
                     </Heading>
                     <Box>
                         <Tooltip label="Refresh" hasArrow>
-                            <IconButton aria-label={'Refresh'} icon={<FiRefreshCw />} onClick={handleRefresh} />
+                            <IconButton size="sm" aria-label={'Refresh'} icon={<FiRefreshCw />} onClick={handleRefresh} />
                         </Tooltip>
-                        <Menu>
-                            <Tooltip label="More options" hasArrow placement="bottom-end">
-                                <MenuButton>
-                                    <IconButton ms={4} aria-label={'Refresh'} icon={<FaEllipsisV />} />
-                                </MenuButton>
-                            </Tooltip>
-                            <MenuList>
-                                <MenuItem fontSize="sm">Export as CSV</MenuItem>
-                            </MenuList>
-                        </Menu>
                     </Box>
                 </Flex>
             </CardHeader>
             <CardBody>
-                <Tabs isFitted className={styles.dashboardTabsContainer} color="gray.700">
+                <Tabs isLazy isFitted className={styles.dashboardTabsContainer} color="gray.700">
                     <TabList>
                         <Tab
                             className={styles.dashboardTab}
