@@ -6,20 +6,29 @@ import { BsCash } from 'react-icons/bs'
 import { FaTruckPickup } from 'react-icons/fa'
 import { GiOrganigram } from 'react-icons/gi'
 import { TbFileInvoice } from 'react-icons/tb'
+// import Form from './components/Form'
 
 import styles from './settings.module.scss'
 
 export default function SettingsPage() {
     return (
+        
         <Card w={`100%`} variant="outline">
             <CardHeader>
                 <Heading size="md" color="gray.900">
-                    Settings
+                <div className="col-lg-4 p-3 text-center text-lg-start border-0">                    
+                    <p>Click to enter form</p>
+                </div>
                 </Heading>
+                {/* <Link href="/components/Form" passHref>
+                    Fill Form
+                </Link> */}
+                
                 <Text as="p" fontSize="xs" color="gray.500" mt={2}>
                     Overview your configurations across UniLog. Select a category to begin.
                 </Text>
             </CardHeader>
+            {/* <Form /> */}
             <Divider />
             <CardBody overflow={`auto`}>
                 <Flex gap={4} flexWrap={`wrap`} flexBasis={`25%`}>
@@ -47,9 +56,9 @@ export default function SettingsPage() {
                                 </ListItem>
                                 <ListItem>
                                     <Flex align="center" justifyContent="space-between" mt={2} className={styles.link}>
-                                        <Link href="#">
+                                        <Link href="/settings/components/Maps">
                                             <Text as="span" fontSize="sm">
-                                                KYC
+                                                India Map
                                             </Text>
                                         </Link>
                                         <ChevronRightIcon fontSize="sm" />

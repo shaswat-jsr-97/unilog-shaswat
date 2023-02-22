@@ -1,7 +1,9 @@
 import { Card, CardHeader, Divider, Heading, Text } from '@chakra-ui/react'
+import FormSetting from '../components/Form'
 
 export default function CompanyProfile() {
     return (
+        <>
         <Card w={`100%`} variant="outline">
             <CardHeader>
                 <Heading size="md" color="gray.900">
@@ -11,7 +13,9 @@ export default function CompanyProfile() {
                     Overview your configurations across UniLog. Select a category to begin.
                 </Text>
             </CardHeader>
+            <FormSetting />
             <Divider />
         </Card>
+        </>
     )
 }
