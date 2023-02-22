@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { Card, CardBody, CardHeader, Divider, Flex, Icon, Link, List, ListItem, Text } from '@chakra-ui/react'
+import Dashboard from 'layouts/Dashboard/Dashboard'
 import { BsCash } from 'react-icons/bs'
 import { FaTruckPickup } from 'react-icons/fa'
 import { GiOrganigram } from 'react-icons/gi'
@@ -330,3 +331,5 @@ export default function DashboardOverview() {
         </>
     )
 }
+
+DashboardOverview.layout = Dashboard

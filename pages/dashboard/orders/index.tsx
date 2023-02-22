@@ -1,4 +1,5 @@
 import { Text } from '@chakra-ui/react'
+import Dashboard from 'layouts/Dashboard/Dashboard'
 
 export default function DashboardOrders() {
     return (
@@ -7,3 +8,5 @@ export default function DashboardOrders() {
         </>
     )
 }
+
+DashboardOrders.layout = Dashboard

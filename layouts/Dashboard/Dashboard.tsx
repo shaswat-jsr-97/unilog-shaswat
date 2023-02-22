@@ -8,26 +8,27 @@ import {
     IconButton,
     Tab,
     TabList,
-    TabPanel,
-    TabPanels,
     Tabs,
     Tooltip,
 } from '@chakra-ui/react'
-import React from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React, { ReactNode, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { FiRefreshCw } from 'react-icons/fi'
 
-import DashboardCouriers from './components/Courier'
-import DashboardDelays from './components/Delays'
-import DashboardNDR from './components/NDR'
-import DashboardOrders from './components/Orders'
-import DashboardOverview from './components/Overview'
-import DashboardRTO from './components/RTO'
-import DashboardShipments from './components/Shipments'
-import DashboardTracking from './components/Tracking'
+import { DASHBOARD_ROUTE_MAP, DASHBOARD_ROUTE_PATH } from './dashboard-route-map'
 import styles from './dashboard.module.scss'
 
-export default function DashboardPage() {
+export default function Dashboard({ children }: { children: ReactNode }) {
+    const router = useRouter()
+    const [tabIndex, setTabIndex] = useState<number>(0)
+
+    useEffect(() => {
+        const tabName: DASHBOARD_ROUTE_PATH = router.pathname.split('/').at(-1) as DASHBOARD_ROUTE_PATH
+        setTabIndex(DASHBOARD_ROUTE_MAP[tabName].index)
+    }, [router.pathname])
+
     const handleRefresh = () => {
         return toast('Refreshing...')
     }
@@ -51,100 +52,91 @@ export default function DashboardPage() {
                 </Flex>
             </CardHeader>
             <CardBody>
-                <Tabs isLazy isFitted className={styles.dashboardTabsContainer} color="gray.700">
+                <Tabs
+                    isLazy
+                    isFitted
+                    className={styles.dashboardTabsContainer}
+                    color="gray.700"
+                    index={tabIndex}
+                    onChange={setTabIndex}
+                >
                     <TabList>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
                             _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
                             fontWeight="bold"
+                            paddingInline={0}
                         >
-                            Overview
+                            <Link href="/dashboard/overview">Overview</Link>
+                        </Tab>
+
+                        <Tab
+                            className={styles.dashboardTab}
+                            fontSize="sm"
+                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
+                            fontWeight="bold"
+                            paddingInline={0}
+                        >
+                            <Link href="/dashboard/orders">Orders</Link>
                         </Tab>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
                             _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
                             fontWeight="bold"
+                            paddingInline={0}
                         >
-                            Orders
+                            <Link href="/dashboard/shipments">Shipments</Link>
                         </Tab>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
                             _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
                             fontWeight="bold"
+                            paddingInline={0}
                         >
-                            Shipments
+                            <Link href="/dashboard/ndr">NDR</Link>
                         </Tab>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
                             _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
                             fontWeight="bold"
+                            paddingInline={0}
                         >
-                            NDR
+                            <Link href="/dashboard/rto">RTO</Link>
                         </Tab>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
                             _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
                             fontWeight="bold"
+                            paddingInline={0}
                         >
-                            RTO
+                            <Link href="/dashboard/courier">Courier</Link>
                         </Tab>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
                             _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
                             fontWeight="bold"
+                            paddingInline={0}
                         >
-                            Courier
+                            <Link href="/dashboard/delays">Delays</Link>
                         </Tab>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
                             _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
                             fontWeight="bold"
+                            paddingInline={0}
                         >
-                            Delays
-                        </Tab>
-                        <Tab
-                            className={styles.dashboardTab}
-                            fontSize="sm"
-                            _selected={{ color: 'blue.400', borderColor: 'blue.400' }}
-                            fontWeight="bold"
-                        >
-                            Tracking
+                            <Link href="/dashboard/tracking">Tracking</Link>
                         </Tab>
                     </TabList>
 
-                    <TabPanels className={styles.dashboardTabPanel}>
-                        <TabPanel>
-                            <DashboardOverview />
-                        </TabPanel>
-                        <TabPanel>
-                            <DashboardOrders />
-                        </TabPanel>
-                        <TabPanel>
-                            <DashboardShipments />
-                        </TabPanel>
-                        <TabPanel>
-                            <DashboardNDR />
-                        </TabPanel>
-                        <TabPanel>
-                            <DashboardRTO />
-                        </TabPanel>
-                        <TabPanel>
-                            <DashboardCouriers />
-                        </TabPanel>
-                        <TabPanel>
-                            <DashboardDelays />
-                        </TabPanel>
-                        <TabPanel>
-                            <DashboardTracking />
-                        </TabPanel>
-                    </TabPanels>
+                    <Box className={styles.dashboardTabPanel}>{children}</Box>
                 </Tabs>
             </CardBody>
         </Card>

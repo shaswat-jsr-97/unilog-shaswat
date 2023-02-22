@@ -28,7 +28,7 @@ export default function Sidebar() {
             <Accordion allowToggle w={`100%`}>
                 <AccordionItem border="0">
                     <AccordionButton p={0} className={styles.menuItem} _hover={{ bgColor: 'gray.800' }}>
-                        <Link href="/dashboard" className={styles.menuLink}>
+                        <Link href="/dashboard/overview" className={styles.menuLink}>
                             <Flex flexDir="row" flexGrow={1} align="center" gap="0.5rem" py={3} px={2}>
                                 <Icon as={RxDashboard} fontSize="lg" color="white" />
                                 <Text fontWeight="bold" className={styles.title} as="span" fontSize="sm" color="white">
@@ -118,7 +118,7 @@ export default function Sidebar() {
                 </AccordionItem>
             </Accordion>
             {/* <Flex className={styles.menuItem} borderRadius={4} align="center" gap={2}>
-                <Link href="/dashboard" className={styles.menuLink}>
+                <Link href="/dashboard/overview" className={styles.menuLink}>
                     <Flex flexDir="row" flexGrow={1} align="center" gap="0.5rem" py={3} px={2}>
                         <Icon as={RxDashboard} fontSize="lg" color="white" />
                         <Text fontWeight="bold" className={styles.title} as="span" fontSize="sm" color="white">
