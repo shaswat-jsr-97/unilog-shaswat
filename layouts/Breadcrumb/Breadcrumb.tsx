@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
+import { formatText } from './text-format'
+
 export default function BreadcrumbComp() {
     const router = useRouter()
 
@@ -12,7 +14,11 @@ export default function BreadcrumbComp() {
         const asPathNestedRoutes = asPathWithoutQuery.split('/').filter((v) => v.length > 0)
         const crumblist = asPathNestedRoutes.map((subpath, idx) => {
             const href = '/' + asPathNestedRoutes.slice(0, idx + 1).join('/')
-            const title = subpath.charAt(0).toUpperCase() + subpath.slice(1).replace(/([A-Z])/g, ' $1')
+
+            // 'AbcDef' to 'Abc Def' to ['Abc', 'Def']
+            const crumbs = (subpath.charAt(0) + subpath.slice(1).replace(/([A-Z])/g, ' $1')).split(' ')
+            const title = crumbs.map(formatText).join(' ')
+
             return { href, title }
         })
 

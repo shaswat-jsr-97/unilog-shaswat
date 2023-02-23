@@ -1,9 +1,10 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import { NextComponentType, NextPageContext } from 'next'
 import { AppProps } from 'next/app'
 import router from 'next/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { useEffect } from 'react'
+import React, { FC, ReactNode, useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 
 import MainLayout from '../layouts/MainLayout'
@@ -11,7 +12,12 @@ import '../styles/globals.css'
 
 NProgress.configure({ showSpinner: false })
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface CustomAppProps extends AppProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Component: NextComponentType<NextPageContext, any, any> & { layout?: FC<{ children: ReactNode }> }
+}
+
+function MyApp({ Component, pageProps }: CustomAppProps) {
     useEffect(() => {
         const handleRouteStart = () => NProgress.start()
         const handleRouteDone = () => NProgress.done()
@@ -36,7 +42,13 @@ function MyApp({ Component, pageProps }: AppProps) {
                 }}
             />
             <MainLayout>
-                <Component {...pageProps} />
+                {Component.layout ? (
+                    <Component.layout>
+                        <Component {...pageProps} />
+                    </Component.layout>
+                ) : (
+                    <Component {...pageProps} />
+                )}
             </MainLayout>
         </ChakraProvider>
     )
