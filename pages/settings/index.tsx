@@ -1,26 +1,18 @@
 import { ChevronRightIcon } from '@chakra-ui/icons'
-import { Card, CardBody, CardHeader, Divider, Flex, Heading, Icon, List, ListItem, Text } from '@chakra-ui/react'
+import { Card, CardBody, CardHeader, Divider, Flex, Icon, List, ListItem, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import { BsCash } from 'react-icons/bs'
 import { FaTruckPickup } from 'react-icons/fa'
 import { GiOrganigram } from 'react-icons/gi'
 import { TbFileInvoice } from 'react-icons/tb'
+import PageCard from 'shared/components/PageCard/PageCard'
 
 import styles from './settings.module.scss'
 
 export default function SettingsPage() {
     return (
-        <Card w={`100%`} variant="outline">
-            <CardHeader>
-                <Heading size="md" color="gray.900">
-                    Settings
-                </Heading>
-                <Text as="p" fontSize="xs" color="gray.500" mt={2}>
-                    Overview your configurations across UniLog. Select a category to begin.
-                </Text>
-            </CardHeader>
-            <Divider />
+        <PageCard title="Settings" subtitle="Overview your configurations across UniLog. Select a category to begin.">
             <CardBody overflow={`auto`}>
                 <Flex gap={4} flexWrap={`wrap`} flexBasis={`25%`}>
                     <Card w={`25%`} flex="1 0 21%">
@@ -340,6 +332,6 @@ export default function SettingsPage() {
                     </Card>
                 </Flex>
             </CardBody>
-        </Card>
+        </PageCard>
     )
 }
