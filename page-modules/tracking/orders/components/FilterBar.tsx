@@ -57,10 +57,10 @@ export default function FilterBar({ setFilters }: Props) {
         searchText: '',
     })
 
-    const [customFilters] = useState<CustomFilters[]>([])
+    const [customFilters] = useState<CustomFilters>({})
 
     function applyFilters() {
-        setFilters({ ...defaultFilters, customFieldValues: customFilters })
+        setFilters({ ...defaultFilters, customFilters: customFilters })
     }
 
     return (

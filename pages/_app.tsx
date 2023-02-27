@@ -1,4 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NextComponentType, NextPageContext } from 'next'
 import { AppProps } from 'next/app'
 import router from 'next/router'
@@ -11,6 +12,7 @@ import MainLayout from '../layouts/MainLayout'
 import '../styles/globals.css'
 
 NProgress.configure({ showSpinner: false })
+const queryClient = new QueryClient()
 
 interface CustomAppProps extends AppProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,20 +38,22 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
 
     return (
         <ChakraProvider resetCSS={true}>
-            <Toaster
-                toastOptions={{
-                    className: 'default-toast',
-                }}
-            />
-            <MainLayout>
-                {Component.layout ? (
-                    <Component.layout>
+            <QueryClientProvider client={queryClient}>
+                <Toaster
+                    toastOptions={{
+                        className: 'default-toast',
+                    }}
+                />
+                <MainLayout>
+                    {Component.layout ? (
+                        <Component.layout>
+                            <Component {...pageProps} />
+                        </Component.layout>
+                    ) : (
                         <Component {...pageProps} />
-                    </Component.layout>
-                ) : (
-                    <Component {...pageProps} />
-                )}
-            </MainLayout>
+                    )}
+                </MainLayout>
+            </QueryClientProvider>
         </ChakraProvider>
     )
 }

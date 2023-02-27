@@ -25,4 +25,4 @@ export type CustomFilters = {
     [key: string]: string[]
 }
 
-export type Filters = DefaultFilters & { customFieldValues: CustomFilters[] }
+export type Filters = DefaultFilters & { customFilters: CustomFilters }
