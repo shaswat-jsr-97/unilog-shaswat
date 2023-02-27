@@ -1,6 +1,6 @@
 import { Filters } from 'page-modules/tracking/orders/types/filters'
 
-const baseURL = 'https://unilog.unicommerce.com'
+import gateway from './gateway'
 
 export type FetchShipmentsType = {
     code: number
@@ -42,7 +42,7 @@ export async function fetchShipments(filters: Filters): Promise<FetchShipmentsTy
         group_search_criteria[key] = customFilters[key]
     })
 
-    const res = await fetch(`${baseURL}/shipper/api/tracking-list`, {
+    return gateway(`shipper/api/tracking-list`, {
         method: 'POST',
         headers: {
             'APP-KEY': '#$%^SK&SNLSH*^%SF',
@@ -56,8 +56,4 @@ export async function fetchShipments(filters: Filters): Promise<FetchShipmentsTy
             group_search_criteria,
         }),
     })
-
-    if (!res.ok) throw new Error(res.statusText)
-    const text = await res.text()
-    return text ? JSON.parse(text) : {}
 }

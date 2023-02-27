@@ -1,4 +1,5 @@
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { useMemo } from 'react'
 
 import styles from './TanstackTable.module.scss'
 
@@ -8,9 +9,11 @@ type Props<K> = {
 }
 
 export default function TanstackTable<K>({ data, columns }: Props<K>) {
+    const memoizedProps = useMemo(() => ({ data, columns }), [data, columns])
+
     const table = useReactTable({
-        data,
-        columns,
+        data: memoizedProps.data,
+        columns: memoizedProps.columns,
         getCoreRowModel: getCoreRowModel(),
     })
 

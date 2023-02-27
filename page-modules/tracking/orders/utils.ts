@@ -2,7 +2,7 @@ import { FetchShipmentsType } from 'apis/post'
 
 import { ShipmentsColumns } from './types/shipment'
 
-function parseDate(date: string | null | undefined): string {
+export function parseDate(date: string | null | undefined): string {
     if (!date) return '-'
 
     return new Date(date).toLocaleDateString('en-IN', {

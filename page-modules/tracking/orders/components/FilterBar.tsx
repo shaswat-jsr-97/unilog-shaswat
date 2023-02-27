@@ -1,4 +1,5 @@
 import { Button, Flex, Input, Text } from '@chakra-ui/react'
+import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
 
 import { CustomFilters, DefaultFilters, FilterParams, Filters, SortParams } from '../types/filters'
@@ -59,6 +60,8 @@ export default function FilterBar({ setFilters }: Props) {
 
     const [customFilters] = useState<CustomFilters>({})
 
+    const isShipmentsFetching = useIsFetching({ queryKey: ['shipments'] })
+
     function applyFilters() {
         setFilters({ ...defaultFilters, customFilters: customFilters })
     }
@@ -84,7 +87,13 @@ export default function FilterBar({ setFilters }: Props) {
                         {/* TODO: Handle Deviations & Drawer */}
                     </Button>
                     <DownloadCSV />
-                    <Button colorScheme="gray" size="sm" fontSize="xs" onClick={applyFilters}>
+                    <Button
+                        colorScheme="gray"
+                        size="sm"
+                        fontSize="xs"
+                        onClick={applyFilters}
+                        isLoading={!!isShipmentsFetching}
+                    >
                         Search
                     </Button>
                 </Flex>
