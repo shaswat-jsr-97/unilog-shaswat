@@ -36,3 +36,16 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Configurations
 
 ESLint + Prettier + Husky was set up using: [this guide](https://paulintrognon.fr/blog/typescript-prettier-eslint-next-js)
+
+## Folder Structure
+
+    .
+    ├── layouts                 # Layouts which don't require anything other than children
+    ├── lib                     # Wrappers for external libraries
+    ├── page-modules            # Page specific components/utils/hooks/types
+    └── shared                  # Shared components/utils/hooks/types
+
+## Types vs Interfaces
+
+Types are used in this project almost exclusively, until there is a need for some functionality (like extending another interface) specific to interfaces
+required. More [here](https://www.youtube.com/watch?v=zM9UPcIyyhQ)

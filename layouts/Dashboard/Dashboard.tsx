@@ -20,6 +20,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
     const handleRefresh = () => {
         return toast('Refreshing...')
     }
+
     return (
         <PageCard
             title="Dashboard"
