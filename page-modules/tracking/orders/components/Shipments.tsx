@@ -82,6 +82,7 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
         columnHelper.accessor('expectedDeliveryDate', {
             cell: (info) => info.getValue(),
             header: 'Expected Delivery Date',
+            minSize: 200,
         }),
         columnHelper.accessor('deliveryDate', {
             cell: (info) => info.getValue(),
@@ -94,6 +95,7 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
                     Show
                 </Button>
             ),
+            maxSize: 70,
         }),
     ]
 }

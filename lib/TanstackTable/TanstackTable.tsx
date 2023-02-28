@@ -12,7 +12,7 @@ type Props<K> = {
 export default function TanstackTable<K>({ data, columns }: Props<K>) {
     const memoizedProps = useMemo(() => ({ data, columns }), [data, columns])
 
-    const table = useReactTable({
+    const table = useReactTable<K>({
         data: memoizedProps.data,
         columns: memoizedProps.columns,
         getCoreRowModel: getCoreRowModel(),
@@ -36,7 +36,12 @@ export default function TanstackTable<K>({ data, columns }: Props<K>) {
                     {table.getHeaderGroups().map((headerGroup) => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map((header) => (
-                                <th key={header.id}>
+                                <th
+                                    key={header.id}
+                                    style={{
+                                        width: header.getSize(),
+                                    }}
+                                >
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(header.column.columnDef.header, header.getContext())}
@@ -57,7 +62,12 @@ export default function TanstackTable<K>({ data, columns }: Props<K>) {
                             <tr key={row.id}>
                                 {row.getVisibleCells().map((cell) => {
                                     return (
-                                        <td key={cell.id}>
+                                        <td
+                                            key={cell.id}
+                                            style={{
+                                                width: cell.column.getSize(),
+                                            }}
+                                        >
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </td>
                                     )
