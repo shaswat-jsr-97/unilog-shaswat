@@ -1,6 +1,8 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
+import { Flex, IconButton, Input, Tooltip } from '@chakra-ui/react'
 import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
+import { MdFilterAlt } from 'react-icons/md'
 
 import { CustomFilters, DefaultFilters, FilterParams, Filters, SortParams } from '../types/filters'
 import DownloadCSV from './DownloadCSV'
@@ -70,6 +72,7 @@ export default function FilterBar({ setFilters }: Props) {
         <>
             <Flex justifyContent="flex-end" align="center" gap="1rem">
                 <Input
+                    borderRadius="0.3rem"
                     value={defaultFilters.searchText}
                     placeholder="Search AWB/Order/Phone/Facility/Courier"
                     size="sm"
@@ -80,22 +83,27 @@ export default function FilterBar({ setFilters }: Props) {
                     onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && applyFilters()}
                 />
                 <Flex gap={4}>
-                    <Button colorScheme="gray" size="sm">
-                        <Text as="span" fontSize="xs">
-                            Filters
-                        </Text>
-                        {/* TODO: Handle Deviations & Drawer */}
-                    </Button>
+                    <Tooltip hasArrow label="Filters">
+                        <IconButton
+                            aria-label="filters"
+                            icon={<MdFilterAlt />}
+                            colorScheme="gray"
+                            size="sm"
+                        ></IconButton>
+                    </Tooltip>
+
                     <DownloadCSV />
-                    <Button
-                        colorScheme="gray"
-                        size="sm"
-                        fontSize="xs"
-                        onClick={applyFilters}
-                        isLoading={!!isShipmentsFetching}
-                    >
-                        Search
-                    </Button>
+                    <Tooltip hasArrow label="Search">
+                        <IconButton
+                            aria-label="search"
+                            icon={<SearchIcon />}
+                            colorScheme="gray"
+                            size="sm"
+                            fontSize="xs"
+                            onClick={applyFilters}
+                            isLoading={!!isShipmentsFetching}
+                        ></IconButton>
+                    </Tooltip>
                 </Flex>
             </Flex>
         </>
