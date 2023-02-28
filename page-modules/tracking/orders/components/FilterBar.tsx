@@ -1,4 +1,5 @@
-import { Button, Flex, IconButton, Input, Tooltip } from '@chakra-ui/react'
+import { PhoneIcon } from '@chakra-ui/icons'
+import { Button, Flex, IconButton, Input, InputGroup, InputLeftElement, Tooltip } from '@chakra-ui/react'
 import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
 import { MdFilterAlt } from 'react-icons/md'
@@ -70,17 +71,24 @@ export default function FilterBar({ setFilters }: Props) {
     return (
         <>
             <Flex justifyContent="flex-end" align="center" gap="1rem">
-                <Input
-                    borderRadius="0.3rem"
-                    value={defaultFilters.searchText}
-                    placeholder="Search AWB/Order/Phone/Facility/Courier"
-                    size="sm"
-                    w={`30%`}
-                    onChange={(e) =>
-                        dispatchDefaultFilterChange({ type: ActionType.SET_SEARCH_TEXT, payload: e.target.value })
-                    }
-                    onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && applyFilters()}
-                />
+                <InputGroup w={'30%'}>
+                    <InputLeftElement pointerEvents="none" top="-0.25rem">
+                        <PhoneIcon color="gray.300" fontSize="sm" />
+                    </InputLeftElement>
+                    <Input
+                        borderRadius="0.3rem"
+                        value={defaultFilters.searchText}
+                        placeholder="Search AWB/Order/Phone/Facility/Courier"
+                        size="sm"
+                        onChange={(e) =>
+                            dispatchDefaultFilterChange({
+                                type: ActionType.SET_SEARCH_TEXT,
+                                payload: e.target.value,
+                            })
+                        }
+                        onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && applyFilters()}
+                    />
+                </InputGroup>
                 <Flex gap={4}>
                     <Tooltip hasArrow label="Filters">
                         <IconButton aria-label="filters" icon={<MdFilterAlt />} size="sm"></IconButton>
