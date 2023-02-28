@@ -1,4 +1,4 @@
-import { PhoneIcon } from '@chakra-ui/icons'
+import { SearchIcon } from '@chakra-ui/icons'
 import { Button, Flex, IconButton, Input, InputGroup, InputLeftElement, Tooltip } from '@chakra-ui/react'
 import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
@@ -73,7 +73,7 @@ export default function FilterBar({ setFilters }: Props) {
             <Flex justifyContent="flex-end" align="center" gap="1rem">
                 <InputGroup w={'30%'}>
                     <InputLeftElement pointerEvents="none" top="-0.25rem">
-                        <PhoneIcon color="gray.300" fontSize="sm" />
+                        <SearchIcon color="gray.300" fontSize="sm" />
                     </InputLeftElement>
                     <Input
                         borderRadius="0.3rem"
