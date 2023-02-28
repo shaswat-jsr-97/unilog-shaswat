@@ -9,5 +9,4 @@ export interface ShipmentsColumns {
     dispatchDate: string
     expectedDeliveryDate: string
     deliveryDate: string
-    attempts: number
 }

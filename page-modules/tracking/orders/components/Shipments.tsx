@@ -87,14 +87,6 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
             cell: (info) => info.getValue(),
             header: 'Delivery Date',
         }),
-        columnHelper.accessor('attempts', {
-            cell: (info) => (
-                <Text as="p" textAlign="right">
-                    {info.getValue()}
-                </Text>
-            ),
-            header: 'No. of Attempts',
-        }),
         columnHelper.display({
             id: 'actions',
             cell: (info) => (
