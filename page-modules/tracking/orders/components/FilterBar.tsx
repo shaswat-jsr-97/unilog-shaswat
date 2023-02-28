@@ -1,11 +1,10 @@
-import { SearchIcon } from '@chakra-ui/icons'
-import { Flex, IconButton, Input, Tooltip } from '@chakra-ui/react'
+import { Button, Flex, IconButton, Input, Tooltip } from '@chakra-ui/react'
 import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
 import { MdFilterAlt } from 'react-icons/md'
 
 import { CustomFilters, DefaultFilters, FilterParams, Filters, SortParams } from '../types/filters'
-import DownloadCSV from './DownloadCSV'
+import MoreOptions from './MoreOptions'
 
 type Props = {
     filters: Filters
@@ -84,26 +83,12 @@ export default function FilterBar({ setFilters }: Props) {
                 />
                 <Flex gap={4}>
                     <Tooltip hasArrow label="Filters">
-                        <IconButton
-                            aria-label="filters"
-                            icon={<MdFilterAlt />}
-                            colorScheme="gray"
-                            size="sm"
-                        ></IconButton>
+                        <IconButton aria-label="filters" icon={<MdFilterAlt />} size="sm"></IconButton>
                     </Tooltip>
-
-                    <DownloadCSV />
-                    <Tooltip hasArrow label="Search">
-                        <IconButton
-                            aria-label="search"
-                            icon={<SearchIcon />}
-                            colorScheme="gray"
-                            size="sm"
-                            fontSize="xs"
-                            onClick={applyFilters}
-                            isLoading={!!isShipmentsFetching}
-                        ></IconButton>
-                    </Tooltip>
+                    <Button size="sm" colorScheme="teal" isLoading={!!isShipmentsFetching}>
+                        Search
+                    </Button>
+                    <MoreOptions />
                 </Flex>
             </Flex>
         </>
