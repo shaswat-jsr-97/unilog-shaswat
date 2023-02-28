@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { ReactNode, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import PageCard from 'shared/components/PageCard/PageCard'
+import { ROUTES } from 'shared/utils/enums'
 
 import { DASHBOARD_ROUTE_MAP, DASHBOARD_ROUTE_PATH } from './dashboard-route-map'
 import styles from './dashboard.module.scss'
@@ -44,7 +45,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
                             fontWeight="bold"
                             paddingInline={0}
                         >
-                            <Link href="/dashboard/overview">Overview</Link>
+                            <Link href={ROUTES.HOME_PAGE}>Overview</Link>
                         </Tab>
 
                         <Tab

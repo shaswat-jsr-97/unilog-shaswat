@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NextComponentType, NextPageContext } from 'next'
 import { AppProps } from 'next/app'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import React, { FC, ReactNode, useEffect } from 'react'
@@ -20,6 +20,8 @@ interface CustomAppProps extends AppProps {
 }
 
 function MyApp({ Component, pageProps }: CustomAppProps) {
+    const router = useRouter()
+
     useEffect(() => {
         const handleRouteStart = () => NProgress.start()
         const handleRouteDone = () => NProgress.done()
@@ -44,15 +46,19 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
                         className: 'default-toast',
                     }}
                 />
-                <MainLayout>
-                    {Component.layout ? (
-                        <Component.layout>
+                {router.route === '/404' || router.route === '/_error' ? (
+                    <Component {...pageProps} />
+                ) : (
+                    <MainLayout>
+                        {Component.layout ? (
+                            <Component.layout>
+                                <Component {...pageProps} />
+                            </Component.layout>
+                        ) : (
                             <Component {...pageProps} />
-                        </Component.layout>
-                    ) : (
-                        <Component {...pageProps} />
-                    )}
-                </MainLayout>
+                        )}
+                    </MainLayout>
+                )}
             </QueryClientProvider>
         </ChakraProvider>
     )

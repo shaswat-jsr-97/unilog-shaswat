@@ -14,6 +14,7 @@ import { HiOutlineDocument } from 'react-icons/hi'
 import { IoMdSettings } from 'react-icons/io'
 import { IoLogoOctocat } from 'react-icons/io'
 import { RxDashboard } from 'react-icons/rx'
+import { ROUTES } from 'shared/utils/enums'
 
 import styles from './sidebar.module.scss'
 
@@ -29,7 +30,7 @@ export default function Sidebar() {
             <Accordion allowToggle w={`100%`}>
                 <AccordionItem border="0">
                     <AccordionButton p={0} className={styles.menuItem} _hover={{ bgColor: 'gray.800' }}>
-                        <Link href="/dashboard/overview" className={styles.menuLink}>
+                        <Link href={ROUTES.HOME_PAGE} className={styles.menuLink}>
                             <Flex flexDir="row" flexGrow={1} align="center" gap="0.5rem" py={3} px={2}>
                                 <Icon as={RxDashboard} fontSize="lg" color="white" />
                                 <Text fontWeight="bold" className={styles.title} as="span" fontSize="sm" color="white">
