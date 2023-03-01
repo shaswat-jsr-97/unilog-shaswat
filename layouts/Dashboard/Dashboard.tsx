@@ -1,21 +1,9 @@
-import {
-    Box,
-    Card,
-    CardBody,
-    CardHeader,
-    Flex,
-    Heading,
-    IconButton,
-    Tab,
-    TabList,
-    Tabs,
-    Tooltip,
-} from '@chakra-ui/react'
+import { Box, CardBody, Tab, TabList, Tabs } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { ReactNode, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { FiRefreshCw } from 'react-icons/fi'
+import PageCard from 'shared/components/PageCard/PageCard'
 
 import { DASHBOARD_ROUTE_MAP, DASHBOARD_ROUTE_PATH } from './dashboard-route-map'
 import styles from './dashboard.module.scss'
@@ -32,25 +20,13 @@ export default function Dashboard({ children }: { children: ReactNode }) {
     const handleRefresh = () => {
         return toast('Refreshing...')
     }
+
     return (
-        <Card w={`100%`}>
-            <CardHeader pb={0}>
-                <Flex flexDir="row" align={`center`} justify={`space-between`}>
-                    <Heading size="md" color="gray.900">
-                        Dashboard
-                    </Heading>
-                    <Box>
-                        <Tooltip label="Refresh" hasArrow>
-                            <IconButton
-                                size="sm"
-                                aria-label={'Refresh'}
-                                icon={<FiRefreshCw />}
-                                onClick={handleRefresh}
-                            />
-                        </Tooltip>
-                    </Box>
-                </Flex>
-            </CardHeader>
+        <PageCard
+            title="Dashboard"
+            subtitle="Consolidation of all your data across UniLog."
+            handleRefresh={handleRefresh}
+        >
             <CardBody>
                 <Tabs
                     isLazy
@@ -139,6 +115,6 @@ export default function Dashboard({ children }: { children: ReactNode }) {
                     <Box className={styles.dashboardTabPanel}>{children}</Box>
                 </Tabs>
             </CardBody>
-        </Card>
+        </PageCard>
     )
 }
