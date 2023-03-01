@@ -7,9 +7,11 @@ import styles from './TanstackTable.module.scss'
 type Props<K> = {
     data: K[]
     columns: ColumnDef<K>[]
+    headerRowHeight?: number
+    dataRowHeight?: number
 }
 
-export default function TanstackTable<K>({ data, columns }: Props<K>) {
+export default function TanstackTable<K>({ data, columns, headerRowHeight = 3.5, dataRowHeight = 5 }: Props<K>) {
     const memoizedProps = useMemo(() => ({ data, columns }), [data, columns])
 
     const table = useReactTable<K>({
@@ -34,7 +36,7 @@ export default function TanstackTable<K>({ data, columns }: Props<K>) {
             <table className={styles.table}>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
-                        <tr key={headerGroup.id} style={{ height: '3.5rem' }}>
+                        <tr key={headerGroup.id} style={{ height: `${headerRowHeight}rem` }}>
                             {headerGroup.headers.map((header) => (
                                 <th
                                     key={header.id}
@@ -59,7 +61,7 @@ export default function TanstackTable<K>({ data, columns }: Props<K>) {
                     {virtualRows.map((virtualRow) => {
                         const row = rows[virtualRow.index]
                         return (
-                            <tr key={row.id} style={{ height: '5rem' }}>
+                            <tr key={row.id} style={{ height: `${dataRowHeight}rem` }}>
                                 {row.getVisibleCells().map((cell) => {
                                     return (
                                         <td
