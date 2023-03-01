@@ -128,7 +128,7 @@ const Maps = () => {
     },[])
   return (
     <>
-    <Container w={'100%'} h={'100%'}>
+    <Container w={'200px'} h={'200px'}>
         <h1 className='heading'>Maps Below</h1>
 
         <div className={maps.maps}>

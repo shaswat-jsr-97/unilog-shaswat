@@ -1,9 +1,11 @@
   .submitButton {
-    border: 2px solid rgb(154, 154, 154);
+    border: 2px solid rgb(40, 148, 214);
     border-radius: 5px;
-    background-color: rgb(233, 226, 226);
+    background-color: rgb(40, 148, 214);
+    color: white;
+    margin: 8px auto;
     &:hover{
-      background-color: rgb(154, 154, 154);;
+      background-color: rgb(89, 170, 221);;
     }
   } 
   .errorInput{

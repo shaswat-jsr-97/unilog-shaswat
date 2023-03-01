@@ -7,10 +7,10 @@ export default function CompanyProfile() {
         <Card w={`100%`} variant="outline">
             <CardHeader>
                 <Heading size="md" color="gray.900">
-                    Company Profile
+                    Fill In The Form
                 </Heading>
                 <Text as="p" fontSize="xs" color="gray.500" mt={2}>
-                    Overview your configurations across UniLog. Select a category to begin.
+                    Please Enter The Form Details
                 </Text>
             </CardHeader>
             <FormSetting />
