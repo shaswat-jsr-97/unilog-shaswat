@@ -17,6 +17,7 @@ import {
 import { ColumnDef, Row, createColumnHelper } from '@tanstack/react-table'
 import TanstackTable from 'lib/TanstackTable/TanstackTable'
 import { useMemo, useState } from 'react'
+import TextWithTooltip from 'shared/components/TextWithTooltip/TextWithTooltip'
 
 import { useShipments } from '../hooks/queries'
 import { Filters } from '../types/filters'
@@ -37,55 +38,74 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
             cell: (info) => {
                 return (
                     <>
-                        <Text>AWB: {info.getValue().awb}</Text>
-                        <Text>Courier: {info.getValue().courier}</Text>
+                        <Text isTruncated width={'14rem'}>
+                            AWB: {info.getValue().awb}
+                        </Text>
+                        <TextWithTooltip text={'Courier: ' + info.getValue().courier} width={'14rem'}></TextWithTooltip>
                     </>
                 )
             },
             header: 'Shipping Provider',
         }),
         columnHelper.accessor('saleOrder', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'6rem'}></TextWithTooltip>
+            },
             header: 'Sale Order',
         }),
         columnHelper.accessor('customer', {
             cell: (info) => {
                 return (
                     <>
-                        <Text>{info.getValue().name}</Text>
-                        <Text>{info.getValue().phone}</Text>
+                        <TextWithTooltip text={info.getValue().name} width={'6rem'}></TextWithTooltip>
+                        <Text isTruncated width={'6rem'}>
+                            {info.getValue().phone}
+                        </Text>
                     </>
                 )
             },
             header: 'Customer',
         }),
         columnHelper.accessor('shippingPackage', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'6rem'}></TextWithTooltip>
+            },
             header: 'Shipping Package',
         }),
         columnHelper.accessor('facility', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'4rem'}></TextWithTooltip>
+            },
             header: 'Facility',
         }),
         columnHelper.accessor('trackingStatus', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'4rem'}></TextWithTooltip>
+            },
             header: 'Tracking Status',
         }),
         columnHelper.accessor('orderDate', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
+            },
             header: 'Order Date',
         }),
         columnHelper.accessor('dispatchDate', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
+            },
             header: 'Dispatch Date',
         }),
         columnHelper.accessor('expectedDeliveryDate', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
+            },
             header: 'Expected Delivery Date',
-            minSize: 200,
         }),
         columnHelper.accessor('deliveryDate', {
-            cell: (info) => info.getValue(),
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
+            },
             header: 'Delivery Date',
         }),
         columnHelper.display({

@@ -34,7 +34,7 @@ export default function TanstackTable<K>({ data, columns }: Props<K>) {
             <table className={styles.table}>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
-                        <tr key={headerGroup.id}>
+                        <tr key={headerGroup.id} style={{ height: '3.5rem' }}>
                             {headerGroup.headers.map((header) => (
                                 <th
                                     key={header.id}
@@ -59,7 +59,7 @@ export default function TanstackTable<K>({ data, columns }: Props<K>) {
                     {virtualRows.map((virtualRow) => {
                         const row = rows[virtualRow.index]
                         return (
-                            <tr key={row.id}>
+                            <tr key={row.id} style={{ height: '5rem' }}>
                                 {row.getVisibleCells().map((cell) => {
                                     return (
                                         <td
