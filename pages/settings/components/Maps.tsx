@@ -1,6 +1,9 @@
 import React , {useState ,useEffect} from 'react'
 import { Container } from '@chakra-ui/react'
 import DatamapsIndia from 'react-datamaps-india'
+import maps from "./maps.module.scss";
+
+
 const dataFrombackEnd=
     {
         'Maharashtra': {
@@ -125,33 +128,34 @@ const Maps = () => {
     },[])
   return (
     <>
-    <Container w={'100%'} >
-        <h2>Maps Below</h2>
-        <DatamapsIndia
-        regionData={regionData}
-        // regionData={state.regionData}
-        hoverComponent={({ value }) => {
-            return (
-            <>
-                <p>{value.name}</p>
-                <p>{value.value}</p>
-            </>
-            )
-        }}
-        mapLayout={{
-            title: 'Title',
-            legendTitle: 'Legend Title',
-            startColor: '#FFDAB9',
-            endColor: '#FF6347',
-            hoverTitle: 'Count',
-            noDataColor: '#f5f5f5',
-            borderColor: '#8D8D8D',
-            hoverBorderColor: '#8D8D8D',
-            hoverColor: 'green',
-        }}
-        />
-        
+    <Container w={'100%'} h={'100%'}>
+        <h1 className='heading'>Maps Below</h1>
 
+        <div className={maps.maps}>
+            <DatamapsIndia
+                regionData={regionData}
+                // regionData={state.regionData}
+                hoverComponent={({ value }) => {
+                    return (
+                    <>
+                        <p>{value.name}</p>
+                        <p>{value.value}</p>
+                    </>
+                    )
+                }}
+                mapLayout={{
+                    // title: 'Title',
+                    legendTitle: 'Legend Title',
+                    startColor: '#FFDAB9',
+                    endColor: '#FF6347',
+                    hoverTitle: 'Count',
+                    noDataColor: '#f5f5f5',
+                    borderColor: '#8D8D8D',
+                    hoverBorderColor: '#8D8D8D',
+                    hoverColor: 'green',
+                }}
+            />
+        </div>
     </Container>
     </>
   )

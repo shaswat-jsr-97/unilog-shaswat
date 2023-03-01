@@ -5,10 +5,10 @@ import {
   FormLabel,
   VStack,
   Divider,
+  Container
 } from '@chakra-ui/react';import { useFormik } from "formik";
 import * as Yup from "yup";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from "./Form.module.scss"
+import styles from "./styles.module.scss";
 
 function FormSetting() {
 
@@ -25,11 +25,11 @@ function FormSetting() {
     // form validation
     
     validationSchema: Yup.object().shape({
-      firstName: Yup.string().required(),
-      lastName: Yup.string().required(),
+      firstName: Yup.string().required("*First Name is Mandatory"),
+      lastName: Yup.string().required("*Last Name is Mandatory"),
       username: Yup.string().required("*Please Fill The Mandatory Field"),
-      email: Yup.string().email("Invalid Email Address").required(),
-      phone: Yup.number().min(10).required(),
+      email: Yup.string().email("Invalid Email Address").required("*Email is Mandatory"),
+      phone: Yup.number().min(10).required("*Phone Number is Mandatory"),
     }),
 
 
@@ -40,23 +40,22 @@ function FormSetting() {
 
   });
 
-
+// console.log(FormInput.errors.firstName)
   return (
-    // <Container maxW={'container.xl'} h={'100%'} p={'16'} >
+    <Container maxW={'container.xl'} h={'100%'} p={'16'} overflowY="auto" >
        
           <VStack
             alignItems={'stretch'}
             spacing={'8'}
             w={['full', '96']}
             h={'100%'}
-            m={'auto'}
-            my={'16'}
+            m={'0 auto'}
+            // my={'16'}
           >
             <form onSubmit={FormInput.handleSubmit} style={{width:'80%'}}>
-            <Heading alignSelf={"center"}>Fill In Form</Heading>
-            {/* <Avatar alignSelf={'center'} boxSize={'32'} /> */}
-
-          {/* <div> */}
+            <Heading>Fill In Form</Heading>
+            
+          <div></div>
           <FormLabel htmlFor="validationCustom01" className="form-label">
             First Name
           </FormLabel>
@@ -67,14 +66,17 @@ function FormSetting() {
               id="validationCustom01"
               value={FormInput.values.firstName}
               onChange={FormInput.handleChange}
+              border='1px' 
+              borderColor={FormInput.errors.firstName?'red':'white'}
+
             />
             {FormInput.touched.firstName && FormInput.errors.firstName && (
-            <div>
+            <div className={styles.errorInput}>
               {FormInput.errors.firstName}
             </div>
           )}
           {/* <div> */}
-          <FormLabel htmlFor="validationCustom02" className="form-label">
+          <FormLabel htmlFor="validationCustom02">
             Last name
           </FormLabel>
             <Input 
@@ -83,15 +85,16 @@ function FormSetting() {
               name="lastName"
               onChange={FormInput.handleChange}
               value={FormInput.values.lastName} 
-              className="form-control"
+              border='1px' 
+              borderColor={FormInput.errors.lastName?'red':'white'}
               id="validationCustom02"
             />
             {FormInput.touched.lastName && FormInput.errors.lastName && (
-            <div>
+            <div className={styles.errorInput}>
               {FormInput.errors.lastName}
             </div>
           )}
-          {/* </div> */}
+        
           <FormLabel htmlFor="validationCustomUsername" className="form-label">
             Username
           </FormLabel>
@@ -101,11 +104,12 @@ function FormSetting() {
             name="username"
             onChange={FormInput.handleChange}
             value={FormInput.values.username}
-            className="form-control"
+            border='1px' 
+            borderColor={FormInput.errors.username?'red':'white'}
             id="validationCustomUsername"
           />
           {FormInput.touched.username && FormInput.errors.username && (
-              <div>
+              <div className={styles.errorInput}>
                 {FormInput.errors.username}
               </div>
           )}
@@ -118,12 +122,13 @@ function FormSetting() {
             onChange={FormInput.handleChange}
             value={FormInput.values.email}
             name="email"
-            className="form-control"
+            border='1px' 
+            borderColor={FormInput.errors.email?'red':'white'}
             id="validationCustom03"
             placeholder='Email'
           />
           {FormInput.touched.email && FormInput.errors.email && (
-            <div>
+            <div className={styles.errorInput}>
               {FormInput.errors.email}
             </div>
           )}
@@ -137,17 +142,18 @@ function FormSetting() {
             type="tel"
             placeholder='Phone Number'
             name="phone"
-            className="form-control"
+            border='1px' 
+            borderColor={FormInput.errors.phone?'red':'white'}
             id="validationCustom05"
           />
           {FormInput.touched.phone && FormInput.errors.phone && (
-            <div>
+            <div className={styles.errorInput}>
               {FormInput.errors.phone}
             </div>
           )}
 
           <div style={{display:'flex',justifyContent:'center'}}>
-          <button type="submit" style={{alignItems:'center', padding:8}}>
+          <button type="submit" style={{alignItems:'center', padding:8}} className={styles.submitButton}>
              Submit form
           </button>
           </div>
@@ -155,7 +161,7 @@ function FormSetting() {
           
           </form>
           </VStack>
-       
+       </Container>
   );
 }
 
