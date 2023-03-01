@@ -19,7 +19,7 @@ function FormSetting() {
       username: "",
       email: "",
       phone: "",
-      check: false,
+      
     },
     
     // form validation
