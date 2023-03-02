@@ -26,3 +26,25 @@ export type CustomFilters = {
 }
 
 export type Filters = DefaultFilters & { customFilters: CustomFilters }
+
+export enum ActionType {
+    SET_TO = 'SET_TO',
+    SET_FROM = 'SET_FROM',
+    SET_SORT = 'SET_SORT',
+    SET_FILTERS = 'SET_FILTERS',
+    SET_SEARCH_TEXT = 'SET_SEARCH_TEXT',
+}
+
+export type Actions =
+    | {
+          type: ActionType.SET_SEARCH_TEXT | ActionType.SET_FROM | ActionType.SET_TO
+          payload: string
+      }
+    | {
+          type: ActionType.SET_SORT
+          payload: SortParams
+      }
+    | {
+          type: ActionType.SET_FILTERS
+          payload: FilterParams[]
+      }

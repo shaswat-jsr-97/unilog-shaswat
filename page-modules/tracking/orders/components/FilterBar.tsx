@@ -1,38 +1,17 @@
 import { SearchIcon } from '@chakra-ui/icons'
-import { Button, Flex, IconButton, Input, InputGroup, InputLeftElement, Tooltip } from '@chakra-ui/react'
+import { Button, Flex, IconButton, Input, InputGroup, InputLeftElement, Tooltip, useDisclosure } from '@chakra-ui/react'
 import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
 import { MdFilterAlt } from 'react-icons/md'
 
-import { CustomFilters, DefaultFilters, FilterParams, Filters, SortParams } from '../types/filters'
+import { ActionType, Actions, CustomFilters, DefaultFilters, Filters } from '../types/filters'
+import FilterDrawer from './FilterDrawer'
 import MoreOptions from './MoreOptions'
 
 type Props = {
     filters: Filters
     setFilters: Dispatch<SetStateAction<Filters>>
 }
-
-enum ActionType {
-    SET_TO = 'SET_TO',
-    SET_FROM = 'SET_FROM',
-    SET_SORT = 'SET_SORT',
-    SET_FILTERS = 'SET_FILTERS',
-    SET_SEARCH_TEXT = 'SET_SEARCH_TEXT',
-}
-
-type Actions =
-    | {
-          type: ActionType.SET_SEARCH_TEXT | ActionType.SET_FROM | ActionType.SET_TO
-          payload: string
-      }
-    | {
-          type: ActionType.SET_SORT
-          payload: SortParams
-      }
-    | {
-          type: ActionType.SET_FILTERS
-          payload: FilterParams[]
-      }
 
 function reducer(state: DefaultFilters, { type, payload }: Actions): DefaultFilters {
     switch (type) {
@@ -60,7 +39,9 @@ export default function FilterBar({ setFilters }: Props) {
         searchText: '',
     })
 
-    const [customFilters] = useState<CustomFilters>({})
+    const [customFilters, setCustomFilters] = useState<CustomFilters>({})
+
+    const filterDrawerControls = useDisclosure()
 
     const isShipmentsFetching = useIsFetching({ queryKey: ['shipments'] })
 
@@ -91,14 +72,27 @@ export default function FilterBar({ setFilters }: Props) {
                 </InputGroup>
                 <Flex gap={4}>
                     <Tooltip hasArrow label="Filters">
-                        <IconButton aria-label="filters" icon={<MdFilterAlt />} size="sm"></IconButton>
+                        <IconButton
+                            aria-label="filters"
+                            icon={<MdFilterAlt />}
+                            size="sm"
+                            onClick={filterDrawerControls.onOpen}
+                        ></IconButton>
                     </Tooltip>
-                    <Button size="sm" colorScheme="teal" isLoading={!!isShipmentsFetching}>
+                    <Button size="sm" colorScheme="teal" isLoading={!!isShipmentsFetching} onClick={applyFilters}>
                         Search
                     </Button>
                     <MoreOptions />
                 </Flex>
             </Flex>
+            <FilterDrawer
+                controls={filterDrawerControls}
+                defaultFilters={defaultFilters}
+                dispatchDefaultFilterChange={dispatchDefaultFilterChange}
+                customFilters={customFilters}
+                setCustomFilters={setCustomFilters}
+                applyFilters={applyFilters}
+            />
         </>
     )
 }
