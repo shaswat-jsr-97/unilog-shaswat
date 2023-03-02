@@ -17,6 +17,7 @@ import {
 import { ColumnDef, Row, createColumnHelper } from '@tanstack/react-table'
 import TanstackTable from 'lib/TanstackTable/TanstackTable'
 import { useMemo, useState } from 'react'
+import DatatableSkeleton from 'shared/components/Skeletons/Datatable'
 import TextWithTooltip from 'shared/components/TextWithTooltip/TextWithTooltip'
 
 import { useShipments } from '../hooks/queries'
@@ -141,9 +142,9 @@ export default function Shipments({ filters }: Props) {
 
     if (isLoading)
         return (
-            <Center h="90%">
-                <Spinner />
-            </Center>
+            <Box w={'100%'} h={'90%'} mt={4}>
+                <DatatableSkeleton rows={6} columns={8}></DatatableSkeleton>
+            </Box>
         )
     if (isError) return <Center h="400px">{String(error) ?? 'An error occurred, please try again later!'}</Center>
 
