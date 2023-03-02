@@ -8,5 +8,5 @@ type Props = {
 }
 
 export default function CustomFiltersComponent({}: Props) {
-    return <>Custom</>
+    return <></>
 }

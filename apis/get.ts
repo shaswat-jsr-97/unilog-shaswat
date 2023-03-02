@@ -1,3 +1,5 @@
+import { FilterParams, SortParams, TimeRangeParams } from 'page-modules/tracking/orders/types/filters'
+
 import gateway from './gateway'
 
 type TrackingDetails = {
@@ -64,6 +66,30 @@ type FetchShipmentDetails = {
 
 export async function fetchShipmentDetails(trackingNumber: string): Promise<FetchShipmentDetails> {
     return await gateway(`shipper/api/tracking-details?tr_number=${trackingNumber}`, {
+        headers: {
+            'APP-KEY': '#$%^SK&SNLSH*^%SF',
+        },
+    })
+}
+
+type FetchMetaData = {
+    code: number
+    description: string
+    result: {
+        tenant_profile: {
+            tenant_name: string
+            user_name: string
+        }
+        tracking_page: {
+            sort_by: { key: SortParams; display: string; hidden: boolean }[]
+            status_filters: { key: FilterParams; display: string; hidden: boolean }[]
+            time_range_filters: { key: TimeRangeParams; display: string; hidden: boolean }[]
+        }
+    }
+}
+
+export async function fetchMetadata(): Promise<FetchMetaData> {
+    return await gateway(`api/system/meta`, {
         headers: {
             'APP-KEY': '#$%^SK&SNLSH*^%SF',
         },

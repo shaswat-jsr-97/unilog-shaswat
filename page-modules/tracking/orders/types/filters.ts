@@ -13,6 +13,8 @@ export type FilterParams =
     | 'delivered'
     | 'has_delivery_failed'
 
+export type TimeRangeParams = 'last_7_days' | 'last_month' | 'last_90_days' | 'custom'
+
 export type DefaultFilters = {
     to: string // YYYY-MM--DD
     from: string // YYYY-MM--DD
