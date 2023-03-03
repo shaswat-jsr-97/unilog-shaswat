@@ -1,4 +1,4 @@
-import { FilterParams, SortParams, TimeRangeParams } from 'page-modules/tracking/orders/types/filters'
+import { FilterParams, SortParams, TimelineParams } from 'page-modules/tracking/orders/types/filters'
 
 import gateway from './gateway'
 
@@ -83,7 +83,7 @@ type FetchMetaData = {
         tracking_page: {
             sort_by: { key: SortParams; display: string; hidden: boolean }[]
             status_filters: { key: FilterParams; display: string; hidden: boolean }[]
-            time_range_filters: { key: TimeRangeParams; display: string; hidden: boolean }[]
+            time_range_filters: { key: TimelineParams; display: string; hidden: boolean }[]
         }
     }
 }

@@ -10,6 +10,7 @@ import {
     Flex,
 } from '@chakra-ui/react'
 import { Dispatch, SetStateAction } from 'react'
+import { toast } from 'react-hot-toast'
 
 import { Actions, CustomFilters, DefaultFilters } from '../types/filters'
 import CustomFiltersComponent from './CustomFiltersComponent'
@@ -35,6 +36,20 @@ export default function FilterDrawer({
     setCustomFilters,
     applyFilters,
 }: Props) {
+    function validateFilters() {
+        if (defaultFilters.timeline === 'custom') {
+            const days90InMiliSeconds = 90 * 24 * 60 * 60 * 1000
+
+            if (!defaultFilters.from || !defaultFilters.to) throw new Error('Please select custom time range')
+
+            if (new Date(defaultFilters.from).getTime() + days90InMiliSeconds < new Date(defaultFilters.to).getTime())
+                throw new Error('Maximum time range is 90 days')
+
+            if (new Date(defaultFilters.from).getTime() > new Date(defaultFilters.to).getTime())
+                throw new Error('Invalid date range')
+        }
+    }
+
     return (
         <Drawer isOpen={controls.isOpen} onClose={controls.onClose} placement={'right'} size={'sm'}>
             <DrawerOverlay transform={'none !important'} />
@@ -62,8 +77,13 @@ export default function FilterDrawer({
                             mr={4}
                             colorScheme={'teal'}
                             onClick={() => {
-                                applyFilters()
-                                controls.onClose()
+                                try {
+                                    validateFilters()
+                                    applyFilters()
+                                    controls.onClose()
+                                } catch (err) {
+                                    toast.error(String(err ?? 'Invalid Filters'))
+                                }
                             }}
                             size={'xs'}
                             h={`28px`}

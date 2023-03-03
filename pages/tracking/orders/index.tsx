@@ -10,6 +10,7 @@ export default function Orders() {
         to: '',
         from: '',
         sortBy: '',
+        timeline: 'last_7_days',
         filterBy: [],
         searchText: '',
         customFilters: {},

@@ -29,13 +29,7 @@ export type FetchShipmentsType = {
     }
 }
 export async function fetchShipments(filters: Filters): Promise<FetchShipmentsType> {
-    const { from, to, sortBy, filterBy, searchText, customFilters } = filters
-    const days90InMiliSeconds = 90 * 24 * 60 * 60 * 1000
-
-    if (new Date(from).getTime() + days90InMiliSeconds < new Date(to).getTime())
-        throw new Error('Maximum time range is 90 days')
-
-    if (new Date(from).getTime() > new Date(to).getTime()) throw new Error('Invalid date range')
+    const { from, to, timeline, sortBy, filterBy, searchText, customFilters } = filters
 
     const group_search_criteria: Record<string, string[]> = {}
     Object.keys(customFilters).forEach((key) => {
@@ -48,11 +42,12 @@ export async function fetchShipments(filters: Filters): Promise<FetchShipmentsTy
             'APP-KEY': '#$%^SK&SNLSH*^%SF',
         },
         body: JSON.stringify({
-            search_text: searchText,
-            from,
             to,
+            from,
             sort_by: sortBy,
+            time_range_filters: timeline,
             filters: filterBy,
+            search_text: searchText,
             group_search_criteria,
         }),
     })

@@ -1,9 +1,21 @@
-import { Center, Checkbox, Flex, Menu, MenuButton, MenuItem, MenuList, Select, Spinner, Text } from '@chakra-ui/react'
+import {
+    Center,
+    Checkbox,
+    Flex,
+    Input,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList,
+    Select,
+    Spinner,
+    Text,
+} from '@chakra-ui/react'
 import { ChangeEvent, Dispatch } from 'react'
 import { AiFillCaretDown } from 'react-icons/ai'
 
 import { useMetadata } from '../hooks/queries'
-import { ActionType, Actions, DefaultFilters, FilterParams, SortParams } from '../types/filters'
+import { ActionType, Actions, DefaultFilters, FilterParams, SortParams, TimelineParams } from '../types/filters'
 
 type Props = {
     filters: DefaultFilters
@@ -47,7 +59,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                     w={`auto`}
                     size={'sm'}
                     background={'white'}
-                    placeholder={'Sort By'}
+                    placeholder={'Select Sort By'}
                     icon={<AiFillCaretDown fontSize={'14px'} />}
                     defaultValue={filters.sortBy}
                     onChange={(ev) => dispatch({ type: ActionType.SET_SORT, payload: ev.target.value as SortParams })}
@@ -123,6 +135,78 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                     </MenuList>
                 </Menu>
             </Flex>
+
+            {/* time_range_filters */}
+            <Flex align={'center'} gap={2} mb={4}>
+                <Text as={'p'} fontSize={'sm'}>
+                    Timeline:{' '}
+                </Text>
+                <Select
+                    w={`auto`}
+                    size={'sm'}
+                    background={'white'}
+                    placeholder={'Select Timeline'}
+                    icon={<AiFillCaretDown fontSize={'14px'} />}
+                    defaultValue={filters.timeline}
+                    onChange={(ev) =>
+                        dispatch({ type: ActionType.SET_TIMELINE, payload: ev.target.value as TimelineParams })
+                    }
+                >
+                    {data?.result?.tracking_page?.time_range_filters?.filter((option) => !option.hidden)?.length ? (
+                        data.result.tracking_page.time_range_filters
+                            .filter((option) => !option.hidden)
+                            .map((option) => (
+                                <option key={option.key} value={option.key}>
+                                    {option.display}
+                                </option>
+                            ))
+                    ) : (
+                        <option disabled>No Options Available</option>
+                    )}
+                </Select>
+            </Flex>
+
+            {/* custom_time_range */}
+            {filters.timeline === 'custom' ? (
+                <Flex align={'center'} gap={2}>
+                    <Flex align={'center'}>
+                        <Text as={'span'} mr={2} fontSize={'sm'}>
+                            From:{' '}
+                        </Text>
+                        <Input
+                            type={'date'}
+                            value={filters.from}
+                            onChange={(e) =>
+                                dispatch({
+                                    type: ActionType.SET_FROM,
+                                    payload: e.target.value,
+                                })
+                            }
+                            background="white"
+                            size={'sm'}
+                        />
+                    </Flex>
+                    <Flex align={'center'}>
+                        <Text as={'span'} mr={2} fontSize={'sm'}>
+                            To:{' '}
+                        </Text>
+                        <Input
+                            type={'date'}
+                            value={filters.to}
+                            onChange={(e) =>
+                                dispatch({
+                                    type: ActionType.SET_TO,
+                                    payload: e.target.value,
+                                })
+                            }
+                            background="white"
+                            size={'sm'}
+                        />
+                    </Flex>
+                </Flex>
+            ) : (
+                <></>
+            )}
         </>
     )
 }

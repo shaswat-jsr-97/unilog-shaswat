@@ -21,6 +21,8 @@ function reducer(state: DefaultFilters, { type, payload }: Actions): DefaultFilt
             return { ...state, from: payload }
         case ActionType.SET_SORT:
             return { ...state, sortBy: payload }
+        case ActionType.SET_TIMELINE:
+            return { ...state, timeline: payload }
         case ActionType.SET_FILTERS:
             return { ...state, filterBy: payload }
         case ActionType.SET_SEARCH_TEXT:
@@ -35,6 +37,7 @@ export default function FilterBar({ setFilters }: Props) {
         to: '',
         from: '',
         sortBy: '',
+        timeline: 'last_7_days',
         filterBy: [],
         searchText: '',
     })

@@ -13,12 +13,13 @@ export type FilterParams =
     | 'delivered'
     | 'has_delivery_failed'
 
-export type TimeRangeParams = 'last_7_days' | 'last_month' | 'last_90_days' | 'custom'
+export type TimelineParams = 'last_7_days' | 'last_month' | 'last_90_days' | 'custom'
 
 export type DefaultFilters = {
     to: string // YYYY-MM--DD
     from: string // YYYY-MM--DD
     sortBy: SortParams | ''
+    timeline: TimelineParams
     filterBy: FilterParams[]
     searchText: string
 }
@@ -33,6 +34,7 @@ export enum ActionType {
     SET_TO = 'SET_TO',
     SET_FROM = 'SET_FROM',
     SET_SORT = 'SET_SORT',
+    SET_TIMELINE = 'SET_TIMELINE',
     SET_FILTERS = 'SET_FILTERS',
     SET_SEARCH_TEXT = 'SET_SEARCH_TEXT',
 }
@@ -49,4 +51,8 @@ export type Actions =
     | {
           type: ActionType.SET_FILTERS
           payload: FilterParams[]
+      }
+    | {
+          type: ActionType.SET_TIMELINE
+          payload: TimelineParams
       }
