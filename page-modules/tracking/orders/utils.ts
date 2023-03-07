@@ -1,6 +1,29 @@
 import { FetchShipmentsType } from 'apis/post'
 
+import { CustomFilters, DefaultFilters, Filters } from './types/filters'
 import { ShipmentsColumns } from './types/shipment'
+
+export const INIT_DEFAULT_FILTER_VALUES: DefaultFilters = {
+    to: '',
+    from: '',
+    sortBy: '',
+    timeline: 'last_7_days',
+    filterBy: [],
+    searchText: '',
+}
+
+// TODO: To be changed when receiving custom filters depending upon their type
+export const INIT_CUSTOM_FILTER_VALUES: CustomFilters = {}
+
+export const INIT_FILTER_VALUES: Filters = {
+    to: '',
+    from: '',
+    sortBy: '',
+    timeline: 'last_7_days',
+    filterBy: [],
+    searchText: '',
+    customFilters: {},
+}
 
 export function parseDate(date: string | null | undefined): string {
     if (!date) return '-'

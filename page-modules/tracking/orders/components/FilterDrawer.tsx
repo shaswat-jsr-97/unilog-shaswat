@@ -9,10 +9,11 @@ import {
     DrawerOverlay,
     Flex,
 } from '@chakra-ui/react'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 
 import { Actions, CustomFilters, DefaultFilters } from '../types/filters'
+import { INIT_CUSTOM_FILTER_VALUES, INIT_DEFAULT_FILTER_VALUES } from '../utils'
 import CustomFiltersComponent from './CustomFiltersComponent'
 import DefaultFiltersComponent from './DefaultFiltersComponent'
 
@@ -25,7 +26,7 @@ type Props = {
     dispatchDefaultFilterChange: Dispatch<Actions>
     customFilters: CustomFilters
     setCustomFilters: Dispatch<SetStateAction<CustomFilters>>
-    applyFilters: () => void
+    applyFilters: (wasReset?: boolean) => void
 }
 
 export default function FilterDrawer({
@@ -36,6 +37,25 @@ export default function FilterDrawer({
     setCustomFilters,
     applyFilters,
 }: Props) {
+    const [haveFiltersChanged, setHaveFiltersChanged] = useState<boolean>(false)
+
+    useEffect(() => {
+        function haveRelevantDefaultFiltersChanged(): boolean {
+            return (
+                JSON.stringify(defaultFilters.filterBy) !== JSON.stringify(INIT_DEFAULT_FILTER_VALUES.filterBy) ||
+                defaultFilters.sortBy !== INIT_DEFAULT_FILTER_VALUES.sortBy ||
+                defaultFilters.timeline !== INIT_DEFAULT_FILTER_VALUES.timeline
+            )
+        }
+
+        if (
+            haveRelevantDefaultFiltersChanged() ||
+            JSON.stringify(customFilters) !== JSON.stringify(INIT_CUSTOM_FILTER_VALUES)
+        )
+            setHaveFiltersChanged(true)
+        else setHaveFiltersChanged(false)
+    }, [defaultFilters, customFilters])
+
     function validateFilters() {
         if (defaultFilters.timeline === 'custom') {
             const days90InMiliSeconds = 90 * 24 * 60 * 60 * 1000
@@ -63,6 +83,19 @@ export default function FilterDrawer({
                 <DrawerBody>
                     <DefaultFiltersComponent filters={defaultFilters} dispatch={dispatchDefaultFilterChange} />
                     <CustomFiltersComponent filters={customFilters} setFilters={setCustomFilters} />
+                    <Button
+                        size={'xs'}
+                        h={`28px`}
+                        mb={4}
+                        w={'100%'}
+                        isDisabled={!haveFiltersChanged}
+                        onClick={() => {
+                            controls.onClose()
+                            applyFilters(true)
+                        }}
+                    >
+                        Reset all
+                    </Button>
                 </DrawerBody>
 
                 <DrawerFooter

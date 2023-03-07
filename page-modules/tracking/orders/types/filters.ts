@@ -37,6 +37,7 @@ export enum ActionType {
     SET_TIMELINE = 'SET_TIMELINE',
     SET_FILTERS = 'SET_FILTERS',
     SET_SEARCH_TEXT = 'SET_SEARCH_TEXT',
+    RESET_FILTERS = 'RESET_FILTERS',
 }
 
 export type Actions =
@@ -46,7 +47,7 @@ export type Actions =
       }
     | {
           type: ActionType.SET_SORT
-          payload: SortParams
+          payload: SortParams | ''
       }
     | {
           type: ActionType.SET_FILTERS
@@ -55,4 +56,8 @@ export type Actions =
     | {
           type: ActionType.SET_TIMELINE
           payload: TimelineParams
+      }
+    | {
+          type: ActionType.RESET_FILTERS
+          payload: null
       }

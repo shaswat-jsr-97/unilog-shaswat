@@ -5,6 +5,7 @@ import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState 
 import { MdFilterAlt } from 'react-icons/md'
 
 import { ActionType, Actions, CustomFilters, DefaultFilters, Filters } from '../types/filters'
+import { INIT_CUSTOM_FILTER_VALUES, INIT_DEFAULT_FILTER_VALUES } from '../utils'
 import FilterDrawer from './FilterDrawer'
 import MoreOptions from './MoreOptions'
 
@@ -27,20 +28,25 @@ function reducer(state: DefaultFilters, { type, payload }: Actions): DefaultFilt
             return { ...state, filterBy: payload }
         case ActionType.SET_SEARCH_TEXT:
             return { ...state, searchText: payload }
+        case ActionType.RESET_FILTERS:
+            return {
+                ...state,
+                to: INIT_DEFAULT_FILTER_VALUES.to,
+                from: INIT_DEFAULT_FILTER_VALUES.from,
+                sortBy: INIT_DEFAULT_FILTER_VALUES.sortBy,
+                filterBy: INIT_DEFAULT_FILTER_VALUES.filterBy,
+                timeline: INIT_DEFAULT_FILTER_VALUES.timeline,
+            }
         default:
             return state
     }
 }
 
 export default function FilterBar({ setFilters }: Props) {
-    const [defaultFilters, dispatchDefaultFilterChange] = useReducer<Reducer<DefaultFilters, Actions>>(reducer, {
-        to: '',
-        from: '',
-        sortBy: '',
-        timeline: 'last_7_days',
-        filterBy: [],
-        searchText: '',
-    })
+    const [defaultFilters, dispatchDefaultFilterChange] = useReducer<Reducer<DefaultFilters, Actions>>(
+        reducer,
+        INIT_DEFAULT_FILTER_VALUES,
+    )
 
     const [customFilters, setCustomFilters] = useState<CustomFilters>({})
 
@@ -48,8 +54,20 @@ export default function FilterBar({ setFilters }: Props) {
 
     const isShipmentsFetching = useIsFetching({ queryKey: ['shipments'] })
 
-    function applyFilters() {
-        setFilters({ ...defaultFilters, customFilters: customFilters })
+    function applyFilters(wasReset = false) {
+        if (wasReset) {
+            resetFilters()
+            setFilters({
+                ...INIT_DEFAULT_FILTER_VALUES,
+                searchText: defaultFilters.searchText,
+                customFilters: INIT_CUSTOM_FILTER_VALUES,
+            })
+        } else setFilters({ ...defaultFilters, customFilters: customFilters })
+    }
+
+    function resetFilters() {
+        dispatchDefaultFilterChange({ type: ActionType.RESET_FILTERS, payload: null })
+        setCustomFilters(INIT_CUSTOM_FILTER_VALUES)
     }
 
     return (
@@ -70,7 +88,7 @@ export default function FilterBar({ setFilters }: Props) {
                                 payload: e.target.value,
                             })
                         }
-                        onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && applyFilters()}
+                        onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && applyFilters(true)}
                     />
                 </InputGroup>
                 <Flex gap={4}>
@@ -82,7 +100,12 @@ export default function FilterBar({ setFilters }: Props) {
                             onClick={filterDrawerControls.onOpen}
                         ></IconButton>
                     </Tooltip>
-                    <Button size="sm" colorScheme="teal" isLoading={!!isShipmentsFetching} onClick={applyFilters}>
+                    <Button
+                        size="sm"
+                        colorScheme="teal"
+                        isLoading={!!isShipmentsFetching}
+                        onClick={() => applyFilters()}
+                    >
                         Search
                     </Button>
                     <MoreOptions />
