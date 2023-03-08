@@ -1,11 +1,35 @@
 import { DownloadIcon } from '@chakra-ui/icons'
 import { IconButton, Menu, MenuButton, MenuItem, MenuList, Text, Tooltip } from '@chakra-ui/react'
+import * as PapaParse from 'papaparse'
 import { HiEllipsisVertical } from 'react-icons/hi2'
 
-export default function MenuOptions() {
+import { useShipments } from '../hooks/queries'
+import { Filters } from '../types/filters'
+
+type Props = {
+    filters: Filters
+}
+
+export default function MenuOptions({ filters }: Props) {
+    const { data } = useShipments(filters)
+
     function handleCSVDownload() {
-        console.log('triggered')
+        const tableData = data?.result?.tracking_records ?? []
+
+        const csv = PapaParse.unparse(tableData)
+        const blob = new Blob([csv], { type: 'text/csv' })
+        const a = document.createElement('a')
+        a.download = `Tracking_${new Date().toLocaleDateString('en-IN').split('/').join('')}`
+        a.href = window.URL.createObjectURL(blob)
+        const clickEvt = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        })
+        a.dispatchEvent(clickEvt)
+        a.remove()
     }
+
     return (
         <Menu autoSelect={false}>
             <Tooltip hasArrow label="Menu Options" defaultIsOpen={false} closeOnClick={true}>

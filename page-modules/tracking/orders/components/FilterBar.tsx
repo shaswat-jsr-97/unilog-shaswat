@@ -42,7 +42,7 @@ function reducer(state: DefaultFilters, { type, payload }: Actions): DefaultFilt
     }
 }
 
-export default function FilterBar({ setFilters }: Props) {
+export default function FilterBar({ filters, setFilters }: Props) {
     const [defaultFilters, dispatchDefaultFilterChange] = useReducer<Reducer<DefaultFilters, Actions>>(
         reducer,
         INIT_DEFAULT_FILTER_VALUES,
@@ -108,7 +108,7 @@ export default function FilterBar({ setFilters }: Props) {
                     >
                         Search
                     </Button>
-                    <MoreOptions />
+                    <MoreOptions filters={filters} />
                 </Flex>
             </Flex>
             <FilterDrawer
