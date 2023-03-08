@@ -1,4 +1,5 @@
 import { Filters } from 'page-modules/tracking/orders/types/filters'
+import { FieldValue } from 'shared/types/forms'
 
 import gateway from './gateway'
 
@@ -31,7 +32,7 @@ export type FetchShipmentsType = {
 export async function fetchShipments(filters: Filters): Promise<FetchShipmentsType> {
     const { from, to, timeline, sortBy, filterBy, searchText, customFilters } = filters
 
-    const group_search_criteria: Record<string, string[]> = {}
+    const group_search_criteria: Record<string, FieldValue> = {}
     Object.keys(customFilters).forEach((key) => {
         group_search_criteria[key] = customFilters[key]
     })

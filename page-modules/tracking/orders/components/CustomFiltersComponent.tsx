@@ -1,17 +1,31 @@
-import { Center, Spinner } from '@chakra-ui/react'
-import { Dispatch, SetStateAction } from 'react'
-import FormField from 'shared/components/FormField/FormField'
+import { Center, Flex, Spinner, Text } from '@chakra-ui/react'
+import { Form, Formik } from 'formik'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 
 import { useExtendedMetadata } from '../hooks/queries'
 import { CustomFilters } from '../types/filters'
+import FieldWrapper from './FieldWrapper'
 
 type Props = {
     filters: CustomFilters
     setFilters: Dispatch<SetStateAction<CustomFilters>>
 }
 
-export default function CustomFiltersComponent({}: Props) {
+export default function CustomFiltersComponent({ filters, setFilters }: Props) {
     const { data, isLoading, isError, error } = useExtendedMetadata()
+
+    useEffect(() => {
+        if (data?.result?.extended_meta?.group_search_criteria && !Object.keys(filters).length) {
+            setFilters(
+                Object.keys(data?.result?.extended_meta?.group_search_criteria || {}).reduce((prev, fieldKey) => {
+                    return {
+                        ...prev,
+                        [fieldKey]: data?.result?.extended_meta?.group_search_criteria[fieldKey].init_value,
+                    }
+                }, {}),
+            )
+        }
+    }, [data])
 
     if (isLoading) {
         return (
@@ -25,15 +39,30 @@ export default function CustomFiltersComponent({}: Props) {
 
     if (!data?.result?.extended_meta?.group_search_criteria) return <></>
 
-    const fields = data.result.extended_meta.group_search_criteria
+    const fields = data?.result?.extended_meta?.group_search_criteria
 
     return (
         <>
-            {Object.keys(fields).map((fieldKey) => {
-                if (fields[fieldKey].hidden) return <></>
+            <Formik initialValues={filters} onSubmit={(values) => console.log(values)} enableReinitialize={true}>
+                <Form>
+                    {Object.keys(fields).map((fieldKey) => {
+                        if (fields[fieldKey].hidden) return <></>
 
-                return <FormField key={fieldKey} field={fields[fieldKey]} />
-            })}
+                        return (
+                            <Flex align="center" gap={2} mb={4} key={fieldKey}>
+                                <Text as="p" fontSize="sm">
+                                    {fields[fieldKey].display}:
+                                </Text>
+                                <FieldWrapper
+                                    fieldKey={fieldKey}
+                                    field={fields[fieldKey]}
+                                    persistFilters={setFilters}
+                                />
+                            </Flex>
+                        )
+                    })}
+                </Form>
+            </Formik>
         </>
     )
 }

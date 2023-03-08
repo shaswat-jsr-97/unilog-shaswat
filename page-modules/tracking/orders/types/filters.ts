@@ -1,3 +1,5 @@
+import { FieldValue } from 'shared/types/forms'
+
 export type SortParams =
     | 'order_date'
     | 'dispatch_date'
@@ -25,7 +27,7 @@ export type DefaultFilters = {
 }
 
 export type CustomFilters = {
-    [key: string]: string[]
+    [key: string]: FieldValue
 }
 
 export type Filters = DefaultFilters & { customFilters: CustomFilters }
