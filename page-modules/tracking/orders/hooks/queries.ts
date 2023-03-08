@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchMetadata, fetchShipmentDetails } from 'apis/get'
+import { fetchExtendedMetadata, fetchMetadata, fetchShipmentDetails } from 'apis/get'
 import { fetchShipments } from 'apis/post'
 
 import { Filters } from '../types/filters'
@@ -27,6 +27,15 @@ export function useMetadata() {
     return useQuery({
         queryKey: ['metadata'],
         queryFn: fetchMetadata,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+    })
+}
+
+export function useExtendedMetadata() {
+    return useQuery({
+        queryKey: ['extendedMetadata'],
+        queryFn: fetchExtendedMetadata,
         refetchOnWindowFocus: false,
         refetchOnMount: false,
     })

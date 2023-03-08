@@ -1,4 +1,5 @@
 import { FilterParams, SortParams, TimelineParams } from 'page-modules/tracking/orders/types/filters'
+import { FieldType, FieldValue } from 'shared/types/forms'
 
 import gateway from './gateway'
 
@@ -94,4 +95,77 @@ export async function fetchMetadata(): Promise<FetchMetaData> {
             'APP-KEY': '#$%^SK&SNLSH*^%SF',
         },
     })
+}
+
+type FetchExtendedMetadataServer = {
+    code: number
+    description: string
+    result: {
+        extended_meta: {
+            group_search_criteria: {
+                key: string
+                display_name: string
+                hidden: boolean
+                type: string
+                default_value: [string | null]
+            }[]
+        }
+    }
+}
+
+type FetchExtendedMetadata = {
+    code: number
+    description: string
+    result: {
+        extended_meta: {
+            group_search_criteria: {
+                [key: string]: {
+                    display: string
+                    hidden: boolean
+                    type: FieldType
+                    init_value: FieldValue
+                    options?: {
+                        key: string
+                        display: string
+                        hidden: boolean
+                    }[]
+                }
+            }
+        }
+    }
+}
+
+export async function fetchExtendedMetadata(): Promise<FetchExtendedMetadata> {
+    const data = (await gateway(`api/system/get_extended_meta`, {
+        headers: {
+            'APP-KEY': '#$%^SK&SNLSH*^%SF',
+        },
+    })) as FetchExtendedMetadataServer
+
+    return {
+        code: data.code,
+        description: data.description,
+        result: {
+            extended_meta: {
+                group_search_criteria: data.result.extended_meta.group_search_criteria.reduce((prev, field) => {
+                    return {
+                        ...prev,
+                        [field.key]: {
+                            display: field.display_name,
+                            hidden: field.hidden,
+                            type: field.type,
+                            init_value: field.type === 'multi_select' ? [] : '',
+                            options: field.default_value.filter(Boolean).map((option) => {
+                                return {
+                                    key: option,
+                                    display: option,
+                                    hidden: false,
+                                }
+                            }),
+                        },
+                    }
+                }, {}),
+            },
+        },
+    }
 }
