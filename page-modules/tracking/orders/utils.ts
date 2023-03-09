@@ -45,13 +45,16 @@ export function sanitiseData(data: FetchShipmentsType | null | undefined): Shipm
                 awb: record.tracking_number,
                 courier: record.shipping_source_code,
             },
-            saleOrder: record.order_number,
+            orderDetails: {
+                saleOrder: record.order_number,
+                shippingPackage: record.shipping_package_code,
+            },
             customer: {
                 name: record.customer_name,
                 phone: record.customer_phone,
             },
-            shippingPackage: record.shipping_package_code,
             facility: record.facility_code,
+            courierStatus: record.courier_status,
             trackingStatus: record.current_wismo_display_status,
             orderDate: parseDate(record.order_datetime),
             dispatchDate: parseDate(record.dispatch_datetime),

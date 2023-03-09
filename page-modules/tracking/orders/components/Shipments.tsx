@@ -48,11 +48,19 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
             },
             header: 'Shipping Provider',
         }),
-        columnHelper.accessor('saleOrder', {
+        columnHelper.accessor('orderDetails', {
             cell: (info) => {
-                return <TextWithTooltip text={info.getValue()} width={'6rem'}></TextWithTooltip>
+                return (
+                    <>
+                        <TextWithTooltip text={'SO: ' + info.getValue().saleOrder} width={'7rem'}></TextWithTooltip>
+                        <TextWithTooltip
+                            text={'SP: ' + info.getValue().shippingPackage}
+                            width={'7rem'}
+                        ></TextWithTooltip>
+                    </>
+                )
             },
-            header: 'Sale Order',
+            header: 'Order Details',
         }),
         columnHelper.accessor('customer', {
             cell: (info) => {
@@ -67,17 +75,17 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
             },
             header: 'Customer',
         }),
-        columnHelper.accessor('shippingPackage', {
-            cell: (info) => {
-                return <TextWithTooltip text={info.getValue()} width={'6rem'}></TextWithTooltip>
-            },
-            header: 'Shipping Package',
-        }),
         columnHelper.accessor('facility', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'4rem'}></TextWithTooltip>
             },
             header: 'Facility',
+        }),
+        columnHelper.accessor('courierStatus', {
+            cell: (info) => {
+                return <TextWithTooltip text={info.getValue()} width={'5rem'}></TextWithTooltip>
+            },
+            header: 'Courier Status',
         }),
         columnHelper.accessor('trackingStatus', {
             cell: (info) => {

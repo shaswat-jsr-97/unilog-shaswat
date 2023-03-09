@@ -1,9 +1,12 @@
 export interface ShipmentsColumns {
     shippingProvider: { awb: string; courier: string }
-    saleOrder: string
+    orderDetails: {
+        saleOrder: string
+        shippingPackage: string
+    }
     customer: { name: string; phone: string }
-    shippingPackage: string
     facility: string
+    courierStatus: string
     trackingStatus: string
     orderDate: string
     dispatchDate: string

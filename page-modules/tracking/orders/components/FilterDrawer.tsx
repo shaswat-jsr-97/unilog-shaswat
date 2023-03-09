@@ -80,7 +80,7 @@ export default function FilterDrawer({
     return (
         <Drawer isOpen={controls.isOpen} onClose={controls.onClose} placement={'right'} size={'sm'}>
             <DrawerOverlay transform={'none !important'} />
-            <DrawerContent>
+            <DrawerContent transform={'none !important'}>
                 <DrawerCloseButton size={'sm'} />
 
                 <DrawerHeader py={2} px={4} bg={`gray.100`} fontSize={'sm'}>

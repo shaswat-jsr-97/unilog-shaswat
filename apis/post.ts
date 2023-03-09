@@ -14,6 +14,7 @@ export type FetchShipmentsType = {
             order_number: string
             shipping_package_code: string
             facility_code: string
+            courier_status: string
             current_wismo_display_status: string
             order_datetime: string
             dispatch_datetime: string
