@@ -2,6 +2,7 @@ import { useFormikContext } from 'formik'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import FormField from 'shared/components/FormField/FormField'
 import { Field, FieldType } from 'shared/types/forms'
+import { INIT_VALUE_MAP } from 'shared/utils/forms'
 
 import { CustomFilters } from '../types/filters'
 
@@ -15,17 +16,19 @@ export default function FieldWrapper<T extends FieldType>({ fieldKey, field, per
     const formik = useFormikContext()
 
     useEffect(() => {
-        persistFilters(
-            Object.keys(formik.values || {}).reduce((prev, fieldKey) => {
+        const updatedFilters: CustomFilters = Object.keys(formik.values || {}).reduce<CustomFilters>(
+            (prev, fieldKey) => {
                 return {
                     ...prev,
                     [fieldKey]: {
                         type: field.type,
-                        value: formik.values?.[fieldKey as keyof typeof formik.values],
+                        value: formik.values?.[fieldKey as keyof typeof formik.values] || INIT_VALUE_MAP[field.type],
                     },
                 }
-            }, {}),
+            },
+            {},
         )
+        persistFilters(updatedFilters)
     }, [formik.values])
 
     return <FormField fieldKey={fieldKey} field={field} />

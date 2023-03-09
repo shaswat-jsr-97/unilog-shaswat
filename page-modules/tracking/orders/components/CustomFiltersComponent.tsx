@@ -1,6 +1,7 @@
 import { Center, Flex, Spinner, Text } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import { Dispatch, SetStateAction, useEffect } from 'react'
+import { FieldValue } from 'shared/types/forms'
 
 import { useExtendedMetadata } from '../hooks/queries'
 import { CustomFilters } from '../types/filters'
@@ -50,7 +51,7 @@ export default function CustomFiltersComponent({ filters, setFilters }: Props) {
     return (
         <>
             <Formik
-                initialValues={Object.keys(filters).reduce((prev, fieldKey) => {
+                initialValues={Object.keys(filters).reduce<Record<string, FieldValue>>((prev, fieldKey) => {
                     return {
                         ...prev,
                         [fieldKey]: filters[fieldKey].value,
