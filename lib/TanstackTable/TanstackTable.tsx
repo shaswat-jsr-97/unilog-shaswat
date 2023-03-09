@@ -1,3 +1,4 @@
+import { Center, Text } from '@chakra-ui/react'
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useVirtual } from '@tanstack/react-virtual'
 import { useMemo, useRef } from 'react'
@@ -97,6 +98,15 @@ export default function TanstackTable<K>({ data, columns, headerRowHeight = 3.5,
                     ))}
                 </tfoot>
             </table>
+            {table.getRowModel().rows.length === 0 ? (
+                <Center h={`500px`}>
+                    <Text textAlign={`center`} fontSize="xs" color="gray.500">
+                        No records found.
+                    </Text>
+                </Center>
+            ) : (
+                <></>
+            )}
         </div>
     )
 }
