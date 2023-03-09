@@ -1,4 +1,4 @@
-type FieldTypeToValue = {
+export type FieldTypeToValue = {
     multi_select: string[]
     text_input: string
 }

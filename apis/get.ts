@@ -1,5 +1,6 @@
 import { FilterParams, SortParams, TimelineParams } from 'page-modules/tracking/orders/types/filters'
 import { FieldType, FieldValue } from 'shared/types/forms'
+import { INIT_VALUE_MAP } from 'shared/utils/forms'
 
 import gateway from './gateway'
 
@@ -154,7 +155,7 @@ export async function fetchExtendedMetadata(): Promise<FetchExtendedMetadata> {
                             display: field.display_name,
                             hidden: field.hidden,
                             type: field.type,
-                            init_value: field.type === 'multi_select' ? [] : '',
+                            init_value: INIT_VALUE_MAP[field.type as FieldType],
                             options: field.default_value.filter(Boolean).map((option) => {
                                 return {
                                     key: option,
