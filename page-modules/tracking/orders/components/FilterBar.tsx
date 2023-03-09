@@ -1,5 +1,15 @@
 import { SearchIcon } from '@chakra-ui/icons'
-import { Button, Flex, IconButton, Input, InputGroup, InputLeftElement, Tooltip, useDisclosure } from '@chakra-ui/react'
+import {
+    Button,
+    Flex,
+    IconButton,
+    Input,
+    InputGroup,
+    InputLeftElement,
+    Text,
+    Tooltip,
+    useDisclosure,
+} from '@chakra-ui/react'
 import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
 import { MdFilterAlt } from 'react-icons/md'
@@ -95,7 +105,14 @@ export default function FilterBar({ filters, setFilters }: Props) {
                     <Tooltip hasArrow label="Filters">
                         <IconButton
                             aria-label="filters"
-                            icon={<MdFilterAlt />}
+                            icon={
+                                <>
+                                    <MdFilterAlt />
+                                    <Text position={'absolute'} w={2} h={2} bottom={2} right={1} fontSize={'xx-small'}>
+                                        2
+                                    </Text>
+                                </>
+                            }
                             size="sm"
                             onClick={filterDrawerControls.onOpen}
                         ></IconButton>
