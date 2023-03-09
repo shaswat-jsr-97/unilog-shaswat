@@ -98,42 +98,67 @@ export async function fetchMetadata(): Promise<FetchMetaData> {
     })
 }
 
+type ServerFields = {
+    key: string
+    display_name: string
+    hidden: boolean
+    type: FieldType
+    default_value: [string | null]
+}[]
+
 type FetchExtendedMetadataServer = {
     code: number
     description: string
     result: {
         extended_meta: {
-            group_search_criteria: {
-                key: string
-                display_name: string
-                hidden: boolean
-                type: string
-                default_value: [string | null]
-            }[]
+            group_search_criteria: ServerFields
         }
     }
 }
+
+type Fields = Record<
+    string,
+    {
+        display: string
+        hidden: boolean
+        type: FieldType
+        init_value: FieldValue
+        options?: {
+            key: string
+            display: string
+            hidden: boolean
+        }[]
+    }
+>
 
 type FetchExtendedMetadata = {
     code: number
     description: string
     result: {
         extended_meta: {
-            group_search_criteria: {
-                [key: string]: {
-                    display: string
-                    hidden: boolean
-                    type: FieldType
-                    init_value: FieldValue
-                    options?: {
-                        key: string
-                        display: string
-                        hidden: boolean
-                    }[]
-                }
-            }
+            group_search_criteria: Fields
         }
     }
+}
+
+function mapToFields(serverFields: ServerFields): Fields {
+    const fields: Fields = {}
+
+    serverFields.forEach((serverField) => {
+        const options = serverField.default_value.filter(Boolean) as string[]
+
+        fields[serverField.key] = {
+            display: serverField.display_name,
+            hidden: serverField.hidden,
+            type: serverField.type,
+            init_value: INIT_VALUE_MAP[serverField.type as FieldType],
+            options: options.map((option) => {
+                return { key: option, display: option, hidden: false }
+            }),
+        }
+    })
+
+    return fields
 }
 
 export async function fetchExtendedMetadata(): Promise<FetchExtendedMetadata> {
@@ -143,30 +168,15 @@ export async function fetchExtendedMetadata(): Promise<FetchExtendedMetadata> {
         },
     })) as FetchExtendedMetadataServer
 
-    return {
+    const mappedData: FetchExtendedMetadata = {
         code: data.code,
         description: data.description,
         result: {
             extended_meta: {
-                group_search_criteria: data.result.extended_meta.group_search_criteria.reduce((prev, field) => {
-                    return {
-                        ...prev,
-                        [field.key]: {
-                            display: field.display_name,
-                            hidden: field.hidden,
-                            type: field.type,
-                            init_value: INIT_VALUE_MAP[field.type as FieldType],
-                            options: field.default_value.filter(Boolean).map((option) => {
-                                return {
-                                    key: option,
-                                    display: option,
-                                    hidden: false,
-                                }
-                            }),
-                        },
-                    }
-                }, {}),
+                group_search_criteria: mapToFields(data.result.extended_meta.group_search_criteria),
             },
         },
     }
+
+    return mappedData
 }
