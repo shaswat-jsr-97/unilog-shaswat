@@ -14,6 +14,7 @@ import { useIsFetching } from '@tanstack/react-query'
 import { Dispatch, KeyboardEvent, Reducer, SetStateAction, useReducer, useState } from 'react'
 import { MdFilterAlt } from 'react-icons/md'
 
+import { useDeviations } from '../hooks/custom'
 import { ActionType, Actions, CustomFilters, DefaultFilters, Filters } from '../types/filters'
 import { INIT_CUSTOM_FILTER_VALUES, INIT_DEFAULT_FILTER_VALUES } from '../utils'
 import FilterDrawer from './FilterDrawer'
@@ -59,6 +60,8 @@ export default function FilterBar({ filters, setFilters }: Props) {
     )
 
     const [customFilters, setCustomFilters] = useState<CustomFilters>({})
+
+    const deviations = useDeviations(filters)
 
     const filterDrawerControls = useDisclosure()
 
@@ -108,9 +111,20 @@ export default function FilterBar({ filters, setFilters }: Props) {
                             icon={
                                 <>
                                     <MdFilterAlt />
-                                    <Text position={'absolute'} w={2} h={2} bottom={2} right={1} fontSize={'xx-small'}>
-                                        2
-                                    </Text>
+                                    {deviations ? (
+                                        <Text
+                                            position={'absolute'}
+                                            w={2}
+                                            h={2}
+                                            bottom={2}
+                                            right={1}
+                                            fontSize={'xx-small'}
+                                        >
+                                            {deviations}
+                                        </Text>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </>
                             }
                             size="sm"

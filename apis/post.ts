@@ -34,7 +34,7 @@ export async function fetchShipments(filters: Filters): Promise<FetchShipmentsTy
 
     const group_search_criteria: Record<string, FieldValue> = {}
     Object.keys(customFilters).forEach((key) => {
-        group_search_criteria[key] = customFilters[key]
+        group_search_criteria[key] = customFilters[key].value
     })
 
     return gateway(`shipper/api/tracking-list`, {

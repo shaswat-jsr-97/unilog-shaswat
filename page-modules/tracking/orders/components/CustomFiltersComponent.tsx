@@ -15,15 +15,21 @@ export default function CustomFiltersComponent({ filters, setFilters }: Props) {
     const { data, isLoading, isError, error } = useExtendedMetadata()
 
     useEffect(() => {
+        function generateDefaultFilters(): CustomFilters {
+            const defaultFilters: CustomFilters = {}
+            Object.keys(data?.result?.extended_meta?.group_search_criteria || {}).forEach((fieldKey) => {
+                if (!data?.result?.extended_meta?.group_search_criteria[fieldKey]) return
+
+                defaultFilters[fieldKey] = {
+                    type: data?.result?.extended_meta?.group_search_criteria[fieldKey].type,
+                    value: data?.result?.extended_meta?.group_search_criteria[fieldKey].init_value,
+                }
+            }, {})
+            return defaultFilters
+        }
+
         if (data?.result?.extended_meta?.group_search_criteria && !Object.keys(filters).length) {
-            setFilters(
-                Object.keys(data?.result?.extended_meta?.group_search_criteria || {}).reduce((prev, fieldKey) => {
-                    return {
-                        ...prev,
-                        [fieldKey]: data?.result?.extended_meta?.group_search_criteria[fieldKey].init_value,
-                    }
-                }, {}),
-            )
+            setFilters(generateDefaultFilters())
         }
     }, [data])
 
@@ -43,7 +49,16 @@ export default function CustomFiltersComponent({ filters, setFilters }: Props) {
 
     return (
         <>
-            <Formik initialValues={filters} onSubmit={(values) => console.log(values)} enableReinitialize={true}>
+            <Formik
+                initialValues={Object.keys(filters).reduce((prev, fieldKey) => {
+                    return {
+                        ...prev,
+                        [fieldKey]: filters[fieldKey].value,
+                    }
+                }, {})}
+                onSubmit={(values) => console.log(values)}
+                enableReinitialize={true}
+            >
                 <Form>
                     {Object.keys(fields).map((fieldKey) => {
                         if (fields[fieldKey].hidden) return <></>

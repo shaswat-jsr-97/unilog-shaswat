@@ -11,9 +11,10 @@ import {
 } from '@chakra-ui/react'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { INIT_VALUE_MAP } from 'shared/utils/forms'
 
 import { Actions, CustomFilters, DefaultFilters } from '../types/filters'
-import { INIT_CUSTOM_FILTER_VALUES, INIT_DEFAULT_FILTER_VALUES } from '../utils'
+import { INIT_DEFAULT_FILTER_VALUES } from '../utils'
 import CustomFiltersComponent from './CustomFiltersComponent'
 import DefaultFiltersComponent from './DefaultFiltersComponent'
 
@@ -48,11 +49,17 @@ export default function FilterDrawer({
             )
         }
 
-        if (
-            haveRelevantDefaultFiltersChanged() ||
-            JSON.stringify(customFilters) !== JSON.stringify(INIT_CUSTOM_FILTER_VALUES)
-        )
-            setHaveFiltersChanged(true)
+        function haveCustomFiltersChanged(): boolean {
+            return Object.keys(customFilters).some((filterKey) => {
+                if (
+                    JSON.stringify(customFilters[filterKey].value) !==
+                    JSON.stringify(INIT_VALUE_MAP[customFilters[filterKey].type])
+                )
+                    return true
+            })
+        }
+
+        if (haveRelevantDefaultFiltersChanged() || haveCustomFiltersChanged()) setHaveFiltersChanged(true)
         else setHaveFiltersChanged(false)
     }, [defaultFilters, customFilters])
 

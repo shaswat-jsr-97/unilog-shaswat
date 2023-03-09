@@ -15,7 +15,17 @@ export default function FieldWrapper<T extends FieldType>({ fieldKey, field, per
     const formik = useFormikContext()
 
     useEffect(() => {
-        persistFilters(formik.values as CustomFilters)
+        persistFilters(
+            Object.keys(formik.values || {}).reduce((prev, fieldKey) => {
+                return {
+                    ...prev,
+                    [fieldKey]: {
+                        type: field.type,
+                        value: formik.values?.[fieldKey as keyof typeof formik.values],
+                    },
+                }
+            }, {}),
+        )
     }, [formik.values])
 
     return <FormField fieldKey={fieldKey} field={field} />
