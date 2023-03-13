@@ -1,21 +1,8 @@
-import {
-    Box,
-    Center,
-    Divider,
-    Flex,
-    Spinner,
-    Table,
-    TableContainer,
-    Tbody,
-    Td,
-    Text,
-    Th,
-    Thead,
-    Tr,
-} from '@chakra-ui/react'
+import { Box, Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react'
 
 import { useShipmentDetails } from '../hooks/queries'
 import { parseDate } from '../utils'
+import ChakraTable from './ChakraTable'
 
 type Props = {
     trackingNumber: string
@@ -31,6 +18,36 @@ export default function ShipmentDetail({ trackingNumber }: Props) {
             </Center>
         )
     if (isError) return <Center h="100%">{String(error) ?? 'An error occurred, please try again later!'}</Center>
+
+    const orderItemsColumns = {
+        sku: 'SKU',
+        channelProduct: 'Channel Product',
+        totalCost: 'Total Cost',
+    }
+
+    const trackingEventsColumns = {
+        date: 'Date',
+        status: 'Status',
+        location: 'Location',
+    }
+
+    const orderItemsData: { [key in keyof typeof orderItemsColumns]: string }[] =
+        data.result?.tracking_details?.line_items?.map((lineItem) => {
+            return {
+                sku: lineItem.seller_sku_code,
+                channelProduct: lineItem.channel_product_name,
+                totalCost: lineItem.total_price,
+            }
+        }) || []
+
+    const trackingEventsData: { [key in keyof typeof trackingEventsColumns]: string }[] =
+        data.result?.tracking_details?.tracking_events?.map((trackingEvent) => {
+            return {
+                date: trackingEvent.tracking_datetime || '-',
+                status: trackingEvent.tracking_status || '-',
+                location: trackingEvent.tracking_location || '-',
+            }
+        }) || []
 
     return (
         <>
@@ -197,135 +214,18 @@ export default function ShipmentDetail({ trackingNumber }: Props) {
                 </Box>
             </Flex>
             <Divider mb={4} />
+
             <Text fontSize="md" mb={4}>
                 Order Items{' '}
             </Text>
-            <TableContainer>
-                <Table variant="simple" border={`1px solid var(--chakra-colors-gray-200)`}>
-                    <Thead>
-                        <Tr>
-                            <Th textTransform={`initial`} fontSize="xs" fontWeight="normal" px={2} py={2}>
-                                SKU
-                            </Th>
-                            <Th
-                                textTransform={`initial`}
-                                fontSize="xs"
-                                fontWeight="normal"
-                                px={2}
-                                py={2}
-                                borderLeft="1px solid var(--chakra-colors-gray-200)"
-                            >
-                                Channel Product
-                            </Th>
-                            <Th
-                                textTransform={`initial`}
-                                fontSize="xs"
-                                fontWeight="normal"
-                                px={2}
-                                py={2}
-                                borderLeft="1px solid var(--chakra-colors-gray-200)"
-                            >
-                                Total Cost
-                            </Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {data.result.tracking_details &&
-                            data.result.tracking_details.line_items &&
-                            data.result.tracking_details.line_items.map((item, idx: number) => {
-                                return (
-                                    <Tr key={idx}>
-                                        <Td px={2} py={2} fontSize="sm">
-                                            {item.seller_sku_code}
-                                        </Td>
-                                        <Td
-                                            px={2}
-                                            py={2}
-                                            fontSize="sm"
-                                            borderLeft="1px solid var(--chakra-colors-gray-200)"
-                                        >
-                                            {item.seller_sku_code}
-                                        </Td>
-                                        <Td
-                                            px={2}
-                                            py={2}
-                                            fontSize="sm"
-                                            borderLeft="1px solid var(--chakra-colors-gray-200)"
-                                        >
-                                            {item.total_price}
-                                        </Td>
-                                    </Tr>
-                                )
-                            })}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+            <ChakraTable<typeof orderItemsColumns> columns={orderItemsColumns} data={orderItemsData} />
 
             <Divider my={4} />
 
             <Text fontSize="md" mb={4}>
                 Tracking Events
             </Text>
-            <TableContainer>
-                <Table variant="simple" border={`1px solid var(--chakra-colors-gray-200)`} mb={2}>
-                    <Thead>
-                        <Tr>
-                            <Th textTransform={`initial`} fontSize="xs" fontWeight="normal" px={2} py={2}>
-                                Date
-                            </Th>
-                            <Th
-                                textTransform={`initial`}
-                                fontSize="xs"
-                                fontWeight="normal"
-                                px={2}
-                                py={2}
-                                borderLeft="1px solid var(--chakra-colors-gray-200)"
-                            >
-                                Status
-                            </Th>
-                            <Th
-                                textTransform={`initial`}
-                                fontSize="xs"
-                                fontWeight="normal"
-                                px={2}
-                                py={2}
-                                borderLeft="1px solid var(--chakra-colors-gray-200)"
-                            >
-                                Location
-                            </Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {data.result.tracking_details &&
-                            data.result.tracking_details.tracking_events &&
-                            data.result.tracking_details.tracking_events.map((item, idx: number) => {
-                                return (
-                                    <Tr key={idx}>
-                                        <Td px={2} py={2} fontSize="sm">
-                                            {item.tracking_datetime || '-'}
-                                        </Td>
-                                        <Td
-                                            px={2}
-                                            py={2}
-                                            fontSize="sm"
-                                            borderLeft="1px solid var(--chakra-colors-gray-200)"
-                                        >
-                                            {item.tracking_status || '-'}
-                                        </Td>
-                                        <Td
-                                            px={2}
-                                            py={2}
-                                            fontSize="sm"
-                                            borderLeft="1px solid var(--chakra-colors-gray-200)"
-                                        >
-                                            {item.tracking_location || '-'}
-                                        </Td>
-                                    </Tr>
-                                )
-                            })}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+            <ChakraTable<typeof trackingEventsColumns> columns={trackingEventsColumns} data={trackingEventsData} />
         </>
     )
 }
