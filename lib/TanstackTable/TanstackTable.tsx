@@ -43,6 +43,7 @@ export default function TanstackTable<K>({ data, columns, headerRowHeight = 3.5,
                                     key={header.id}
                                     style={{
                                         width: header.getSize(),
+                                        verticalAlign: 'top',
                                     }}
                                 >
                                     {header.isPlaceholder
