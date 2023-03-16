@@ -12,7 +12,7 @@ type Props<K> = {
     dataRowHeight?: number
 }
 
-export default function TanstackTable<K>({ data, columns, headerRowHeight = 3.5, dataRowHeight = 5 }: Props<K>) {
+export default function TanstackTable<K>({ data, columns, headerRowHeight = 2, dataRowHeight = 4 }: Props<K>) {
     const memoizedProps = useMemo(() => ({ data, columns }), [data, columns])
 
     const table = useReactTable<K>({
