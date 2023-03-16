@@ -17,6 +17,7 @@ import {
 import { ColumnDef, Row, createColumnHelper } from '@tanstack/react-table'
 import TanstackTable from 'lib/TanstackTable/TanstackTable'
 import { useMemo, useState } from 'react'
+import { BsCalendar2Date } from 'react-icons/bs'
 import DatatableSkeleton from 'shared/components/Skeletons/Datatable'
 import TextWithTooltip from 'shared/components/TextWithTooltip/TextWithTooltip'
 
@@ -91,31 +92,51 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'4rem'}></TextWithTooltip>
             },
-            header: 'Tracking Status',
+            header: 'Status',
         }),
         columnHelper.accessor('orderDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: 'Order Date',
+            header: () => (
+                <Flex justifyContent={'space-between'} alignItems={'center'}>
+                    <Text>Order</Text>
+                    <BsCalendar2Date />
+                </Flex>
+            ),
         }),
         columnHelper.accessor('dispatchDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: 'Dispatch Date',
+            header: () => (
+                <Flex justifyContent={'space-between'} alignItems={'center'}>
+                    <Text>Dispatch</Text>
+                    <BsCalendar2Date />
+                </Flex>
+            ),
         }),
         columnHelper.accessor('expectedDeliveryDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: 'Expected Delivery Date',
+            header: () => (
+                <Flex justifyContent={'space-between'} alignItems={'center'}>
+                    <Text>Expected</Text>
+                    <BsCalendar2Date />
+                </Flex>
+            ),
         }),
         columnHelper.accessor('deliveryDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: 'Delivery Date',
+            header: () => (
+                <Flex justifyContent={'space-between'} alignItems={'center'}>
+                    <Text>Delivery</Text>
+                    <BsCalendar2Date />
+                </Flex>
+            ),
         }),
         columnHelper.display({
             id: 'actions',
@@ -157,7 +178,7 @@ export default function Shipments({ filters }: Props) {
     if (isError) return <Center h="400px">{String(error) ?? 'An error occurred, please try again later!'}</Center>
 
     return (
-        <Box mt={4} maxH={`90%`} overflow="scroll" border="1px solid var(--chakra-colors-gray-100)">
+        <Box mt={4} maxH={`62dvh`} overflow="scroll" border="1px solid var(--chakra-colors-gray-100)">
             <TanstackTable<ShipmentsColumns> data={memoizedData} columns={memoizedColumns} />
             <Drawer isOpen={isOpen} placement="right" onClose={hideShipmentDetails} size="xl">
                 <DrawerOverlay transform="none !important" />
