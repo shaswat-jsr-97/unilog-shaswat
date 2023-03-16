@@ -78,7 +78,7 @@ export default function FilterDrawer({
     }
 
     return (
-        <Drawer isOpen={controls.isOpen} onClose={controls.onClose} placement={'right'} size={'sm'}>
+        <Drawer isOpen={controls.isOpen} onClose={controls.onClose} placement={'right'} size={'md'}>
             <DrawerOverlay transform={'none !important'} />
             <DrawerContent transform={'none !important'}>
                 <DrawerCloseButton size={'sm'} />
