@@ -178,7 +178,7 @@ export default function Shipments({ filters }: Props) {
     if (isError) return <Center h="400px">{String(error) ?? 'An error occurred, please try again later!'}</Center>
 
     return (
-        <Box mt={4} maxH={`32.5rem`} overflow="scroll" border="1px solid var(--chakra-colors-gray-100)">
+        <Box mt={4} maxH={`62dvh`} overflow="scroll" border="1px solid var(--chakra-colors-gray-100)">
             <TanstackTable<ShipmentsColumns> data={memoizedData} columns={memoizedColumns} />
             <Drawer isOpen={isOpen} placement="right" onClose={hideShipmentDetails} size="xl">
                 <DrawerOverlay transform="none !important" />
