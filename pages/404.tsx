@@ -7,7 +7,7 @@ import { ROUTES } from 'shared/utils/enums'
 export default function FourOhFourPage() {
     return (
         <>
-            <Center w={`100%`} h="100vh">
+            <Center w={`100%`} h="100dvh">
                 <Flex flexDir="column" gap={4} align="center">
                     <Icon as={BiErrorAlt} fontSize="32px" fontWeight="normal" />
                     <Text textAlign="center">
