@@ -60,7 +60,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                     size={'sm'}
                     fontSize={'small'}
                     background={'white'}
-                    borderRadius="0.3rem"
+                    borderRadius={'0.3rem'}
                     placeholder={'Select Sort By'}
                     icon={<AiFillCaretDown fontSize={'14px'} />}
                     defaultValue={filters.sortBy}
@@ -104,7 +104,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             justifyContent={'space-between'}
                             fontWeight={'normal'}
                             h={'2rem'}
-                            borderRadius="0.3rem"
+                            borderRadius={'0.3rem'}
                             border={'1px solid var(--chakra-colors-gray-200)'}
                             width={'12rem'}
                             paddingBlock={2}
@@ -148,7 +148,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                     w={`auto`}
                     size={'sm'}
                     background={'white'}
-                    borderRadius="0.3rem"
+                    borderRadius={'0.3rem'}
                     placeholder={'Select Timeline'}
                     icon={<AiFillCaretDown fontSize={'14px'} />}
                     defaultValue={filters.timeline}
@@ -190,6 +190,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             background="white"
                             size={'sm'}
                             fontSize={'small'}
+                            borderRadius={'0.3rem'}
                         />
                     </Flex>
                     <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
@@ -208,6 +209,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             background="white"
                             size={'sm'}
                             fontSize={'small'}
+                            borderRadius={'0.3rem'}
                         />
                     </Flex>
                 </Flex>

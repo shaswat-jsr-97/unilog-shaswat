@@ -32,7 +32,7 @@ export default function MultiSelect({ field: { options }, fieldKey }: Props) {
                     align="center"
                     justifyContent="space-between"
                     fontWeight="normal"
-                    borderRadius="0.3rem"
+                    borderRadius={'0.3rem'}
                     className={styles.filterByButton}
                 >
                     {!!values ? `${values.length} Selected` : <Text as="span">Select options</Text>}
