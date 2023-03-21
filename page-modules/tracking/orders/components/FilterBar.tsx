@@ -91,7 +91,7 @@ export default function FilterBar({ filters, setFilters }: Props) {
                         <SearchIcon color="gray.300" fontSize="sm" />
                     </InputLeftElement>
                     <Input
-                        borderRadius="0.3rem"
+                        borderRadius={'0.3rem'}
                         value={defaultFilters.searchText}
                         placeholder="Search AWB/Order/Phone/Facility/Courier"
                         size="sm"

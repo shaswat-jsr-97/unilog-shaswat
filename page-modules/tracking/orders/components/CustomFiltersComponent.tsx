@@ -61,22 +61,24 @@ export default function CustomFiltersComponent({ filters, setFilters }: Props) {
                 enableReinitialize={true}
             >
                 <Form>
-                    {Object.keys(fields).map((fieldKey) => {
-                        if (fields[fieldKey].hidden) return <></>
+                    <Flex flexWrap={'wrap'} justifyContent={'space-between'}>
+                        {Object.keys(fields).map((fieldKey) => {
+                            if (fields[fieldKey].hidden) return <></>
 
-                        return (
-                            <Flex align="center" gap={2} mb={4} key={fieldKey}>
-                                <Text as="p" fontSize="sm">
-                                    {fields[fieldKey].display}:
-                                </Text>
-                                <FieldWrapper
-                                    fieldKey={fieldKey}
-                                    field={fields[fieldKey]}
-                                    persistFilters={setFilters}
-                                />
-                            </Flex>
-                        )
-                    })}
+                            return (
+                                <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4} key={fieldKey}>
+                                    <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
+                                        {fields[fieldKey].display}:
+                                    </Text>
+                                    <FieldWrapper
+                                        fieldKey={fieldKey}
+                                        field={fields[fieldKey]}
+                                        persistFilters={setFilters}
+                                    />
+                                </Flex>
+                            )
+                        })}
+                    </Flex>
                 </Form>
             </Formik>
         </>

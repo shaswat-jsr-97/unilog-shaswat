@@ -49,16 +49,18 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
     if (isError) return <Center h={'400px'}>{String(error) ?? 'An error occurred, please try again later!'}</Center>
 
     return (
-        <>
+        <Flex flexWrap={'wrap'} justifyContent={'space-between'}>
             {/* sort_by */}
-            <Flex align={'center'} gap={2} mb={4}>
-                <Text as={'p'} fontSize={'sm'}>
+            <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
+                <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
                     Sort by:{' '}
                 </Text>
                 <Select
                     w={`auto`}
                     size={'sm'}
+                    fontSize={'small'}
                     background={'white'}
+                    borderRadius={'0.3rem'}
                     placeholder={'Select Sort By'}
                     icon={<AiFillCaretDown fontSize={'14px'} />}
                     defaultValue={filters.sortBy}
@@ -79,8 +81,8 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
             </Flex>
 
             {/* status_filters */}
-            <Flex align={'center'} gap={2} mb={4}>
-                <Text as={'p'} fontSize={'sm'}>
+            <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
+                <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
                     Filter by:{' '}
                     {/* {filters.filterBy.map((filterParam, index) => {
                         const displayName =
@@ -96,12 +98,13 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                     })} */}
                 </Text>
                 <Menu autoSelect={false} closeOnSelect={false}>
-                    <MenuButton background={'white'} fontSize={'sm'}>
+                    <MenuButton background={'white'} fontSize={'small'}>
                         <Flex
                             align={'center'}
                             justifyContent={'space-between'}
                             fontWeight={'normal'}
                             h={'2rem'}
+                            borderRadius={'0.3rem'}
                             border={'1px solid var(--chakra-colors-gray-200)'}
                             width={'12rem'}
                             paddingBlock={2}
@@ -137,17 +140,19 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
             </Flex>
 
             {/* time_range_filters */}
-            <Flex align={'center'} gap={2} mb={4}>
-                <Text as={'p'} fontSize={'sm'}>
+            <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
+                <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
                     Timeline:{' '}
                 </Text>
                 <Select
                     w={`auto`}
                     size={'sm'}
                     background={'white'}
+                    borderRadius={'0.3rem'}
                     placeholder={'Select Timeline'}
                     icon={<AiFillCaretDown fontSize={'14px'} />}
                     defaultValue={filters.timeline}
+                    fontSize={'small'}
                     onChange={(ev) =>
                         dispatch({ type: ActionType.SET_TIMELINE, payload: ev.target.value as TimelineParams })
                     }
@@ -169,8 +174,8 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
             {/* custom_time_range */}
             {filters.timeline === 'custom' ? (
                 <Flex align={'center'} gap={2}>
-                    <Flex align={'center'}>
-                        <Text as={'span'} mr={2} fontSize={'sm'}>
+                    <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
+                        <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
                             From:{' '}
                         </Text>
                         <Input
@@ -184,10 +189,12 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             }
                             background="white"
                             size={'sm'}
+                            fontSize={'small'}
+                            borderRadius={'0.3rem'}
                         />
                     </Flex>
-                    <Flex align={'center'}>
-                        <Text as={'span'} mr={2} fontSize={'sm'}>
+                    <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
+                        <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
                             To:{' '}
                         </Text>
                         <Input
@@ -201,12 +208,14 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             }
                             background="white"
                             size={'sm'}
+                            fontSize={'small'}
+                            borderRadius={'0.3rem'}
                         />
                     </Flex>
                 </Flex>
             ) : (
                 <></>
             )}
-        </>
+        </Flex>
     )
 }

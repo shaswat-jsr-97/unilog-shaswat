@@ -27,11 +27,12 @@ export default function MultiSelect({ field: { options }, fieldKey }: Props) {
 
     return (
         <Menu autoSelect={false} closeOnSelect={false}>
-            <MenuButton background="white" fontSize="sm">
+            <MenuButton background="white" fontSize="small">
                 <Flex
                     align="center"
                     justifyContent="space-between"
                     fontWeight="normal"
+                    borderRadius={'0.3rem'}
                     className={styles.filterByButton}
                 >
                     {!!values ? `${values.length} Selected` : <Text as="span">Select options</Text>}

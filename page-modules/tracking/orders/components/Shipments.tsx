@@ -17,7 +17,6 @@ import {
 import { ColumnDef, Row, createColumnHelper } from '@tanstack/react-table'
 import TanstackTable from 'lib/TanstackTable/TanstackTable'
 import { useMemo, useState } from 'react'
-import { BsCalendar2Date } from 'react-icons/bs'
 import DatatableSkeleton from 'shared/components/Skeletons/Datatable'
 import TextWithTooltip from 'shared/components/TextWithTooltip/TextWithTooltip'
 
@@ -92,56 +91,36 @@ function createColumns(callback: (row: Row<ShipmentsColumns>) => void): ColumnDe
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'4rem'}></TextWithTooltip>
             },
-            header: 'Status',
+            header: () => <TextWithTooltip text={'Tracking Status'} width={'4rem'}></TextWithTooltip>,
         }),
         columnHelper.accessor('orderDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: () => (
-                <Flex justifyContent={'space-between'} alignItems={'center'}>
-                    <Text>Order</Text>
-                    <BsCalendar2Date />
-                </Flex>
-            ),
+            header: () => <TextWithTooltip text={'Order Date'} width={'5rem'}></TextWithTooltip>,
         }),
         columnHelper.accessor('dispatchDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: () => (
-                <Flex justifyContent={'space-between'} alignItems={'center'}>
-                    <Text>Dispatch</Text>
-                    <BsCalendar2Date />
-                </Flex>
-            ),
+            header: () => <TextWithTooltip text={'Dispatch Date'} width={'5rem'}></TextWithTooltip>,
         }),
         columnHelper.accessor('expectedDeliveryDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: () => (
-                <Flex justifyContent={'space-between'} alignItems={'center'}>
-                    <Text>Expected</Text>
-                    <BsCalendar2Date />
-                </Flex>
-            ),
+            header: () => <TextWithTooltip text={'Expected Delivery Date'} width={'5rem'}></TextWithTooltip>,
         }),
         columnHelper.accessor('deliveryDate', {
             cell: (info) => {
                 return <TextWithTooltip text={info.getValue()} width={'5rem'} noOfLines={2}></TextWithTooltip>
             },
-            header: () => (
-                <Flex justifyContent={'space-between'} alignItems={'center'}>
-                    <Text>Delivery</Text>
-                    <BsCalendar2Date />
-                </Flex>
-            ),
+            header: () => <TextWithTooltip text={'Delivery Date'} width={'5rem'}></TextWithTooltip>,
         }),
         columnHelper.display({
             id: 'actions',
             cell: (info) => (
-                <Button size="xs" onClick={() => callback(info.row)}>
+                <Button size="xs" bgColor={'gray.300'} onClick={() => callback(info.row)}>
                     Show
                 </Button>
             ),
