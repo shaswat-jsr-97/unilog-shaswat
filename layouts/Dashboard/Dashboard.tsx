@@ -28,7 +28,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
             subtitle="Consolidation of all your data across UniLog."
             handleRefresh={handleRefresh}
         >
-            <CardBody>
+            <CardBody h={'100%'}>
                 <Tabs
                     isLazy
                     isFitted
@@ -36,8 +36,9 @@ export default function Dashboard({ children }: { children: ReactNode }) {
                     color="gray.700"
                     index={tabIndex}
                     onChange={setTabIndex}
+                    h={'100%'}
                 >
-                    <TabList>
+                    <TabList h={'2.5rem'}>
                         <Tab
                             className={styles.dashboardTab}
                             fontSize="sm"
@@ -113,7 +114,11 @@ export default function Dashboard({ children }: { children: ReactNode }) {
                         </Tab>
                     </TabList>
 
-                    <Box className={styles.dashboardTabPanel}>{children}</Box>
+                    <Box className={styles.dashboardTabPanel} h={'calc(100% - 2.5rem)'}>
+                        <Box overflow={'auto'} h={'100%'}>
+                            {children}
+                        </Box>
+                    </Box>
                 </Tabs>
             </CardBody>
         </PageCard>

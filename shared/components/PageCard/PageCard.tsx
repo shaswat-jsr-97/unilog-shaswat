@@ -11,8 +11,8 @@ type Props = {
 
 export default function PageCard({ title, subtitle, handleRefresh, children }: Props) {
     return (
-        <Card w={`100%`} variant="outline">
-            <CardHeader pb={2}>
+        <Card w={`100%`} h={'100%'} variant="outline">
+            <CardHeader pb={2} h={'5rem'}>
                 <Flex flexDir="row" align={`center`} justify={`space-between`}>
                     <Box>
                         <Heading size="md" color="gray.900">
@@ -39,7 +39,7 @@ export default function PageCard({ title, subtitle, handleRefresh, children }: P
                 </Flex>
             </CardHeader>
             <Divider />
-            {children}
+            <Box h={'calc(100% - 5rem)'}>{children}</Box>
         </Card>
     )
 }
