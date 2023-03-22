@@ -27,7 +27,7 @@ export default function MultiSelect({ field: { options }, fieldKey }: Props) {
 
     return (
         <Menu autoSelect={false} closeOnSelect={false}>
-            <MenuButton background="white" fontSize="small">
+            <MenuButton background="white" fontSize="small" w={'100%'}>
                 <Flex
                     align="center"
                     justifyContent="space-between"

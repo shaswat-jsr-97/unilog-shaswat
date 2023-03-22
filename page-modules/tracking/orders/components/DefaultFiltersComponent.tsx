@@ -2,6 +2,7 @@ import {
     Center,
     Checkbox,
     Flex,
+    Grid,
     Input,
     Menu,
     MenuButton,
@@ -49,14 +50,14 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
     if (isError) return <Center h={'400px'}>{String(error) ?? 'An error occurred, please try again later!'}</Center>
 
     return (
-        <Flex flexWrap={'wrap'} justifyContent={'space-between'}>
+        <Grid templateColumns={'repeat(2, 1fr)'} columnGap={'1rem'}>
             {/* sort_by */}
             <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
                 <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
                     Sort by:{' '}
                 </Text>
                 <Select
-                    w={`auto`}
+                    w={`100%`}
                     size={'sm'}
                     fontSize={'small'}
                     background={'white'}
@@ -98,7 +99,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                     })} */}
                 </Text>
                 <Menu autoSelect={false} closeOnSelect={false}>
-                    <MenuButton background={'white'} fontSize={'small'}>
+                    <MenuButton background={'white'} fontSize={'small'} w={'100%'}>
                         <Flex
                             align={'center'}
                             justifyContent={'space-between'}
@@ -106,7 +107,6 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             h={'2rem'}
                             borderRadius={'0.3rem'}
                             border={'1px solid var(--chakra-colors-gray-200)'}
-                            width={'12rem'}
                             paddingBlock={2}
                             paddingInline={3}
                         >
@@ -145,7 +145,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                     Timeline:{' '}
                 </Text>
                 <Select
-                    w={`auto`}
+                    w={`100%`}
                     size={'sm'}
                     background={'white'}
                     borderRadius={'0.3rem'}
@@ -173,12 +173,13 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
 
             {/* custom_time_range */}
             {filters.timeline === 'custom' ? (
-                <Flex align={'center'} gap={2}>
+                <>
                     <Flex gap={1} flexDir={'column'} alignItems={'flex-start'} mb={4}>
                         <Text as={'p'} fontSize={'x-small'} color={'gray.500'} textTransform={'capitalize'}>
                             From:{' '}
                         </Text>
                         <Input
+                            w={`100%`}
                             type={'date'}
                             value={filters.from}
                             onChange={(e) =>
@@ -198,6 +199,7 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             To:{' '}
                         </Text>
                         <Input
+                            w={`100%`}
                             type={'date'}
                             value={filters.to}
                             onChange={(e) =>
@@ -212,10 +214,10 @@ export default function DefaultFiltersComponent({ filters, dispatch }: Props) {
                             borderRadius={'0.3rem'}
                         />
                     </Flex>
-                </Flex>
+                </>
             ) : (
                 <></>
             )}
-        </Flex>
+        </Grid>
     )
 }

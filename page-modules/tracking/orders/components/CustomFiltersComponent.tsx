@@ -1,4 +1,4 @@
-import { Center, Flex, Spinner, Text } from '@chakra-ui/react'
+import { Center, Flex, Grid, Spinner, Text } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { FieldValue } from 'shared/types/forms'
@@ -61,7 +61,7 @@ export default function CustomFiltersComponent({ filters, setFilters }: Props) {
                 enableReinitialize={true}
             >
                 <Form>
-                    <Flex flexWrap={'wrap'} justifyContent={'space-between'}>
+                    <Grid templateColumns={'repeat(2, 1fr)'} columnGap={'1rem'}>
                         {Object.keys(fields).map((fieldKey) => {
                             if (fields[fieldKey].hidden) return <></>
 
@@ -78,7 +78,7 @@ export default function CustomFiltersComponent({ filters, setFilters }: Props) {
                                 </Flex>
                             )
                         })}
-                    </Flex>
+                    </Grid>
                 </Form>
             </Formik>
         </>
