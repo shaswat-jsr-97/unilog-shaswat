@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 import NavBar from './NavBar/Navbar'
@@ -11,8 +12,10 @@ export default function MainLayout({ children }: { children: ReactNode }) {
             <Sidebar />
             <Flex className={styles.layout} flexDir="column">
                 <NavBar />
-                <Flex className={styles.contentArea} flexGrow={1} p={4}>
-                    {children}
+                <Flex className={styles.contentArea} flexGrow={1} p={'1rem'}>
+                    <Box w={'100%'} h={'100%'}>
+                        {children}
+                    </Box>
                 </Flex>
             </Flex>
         </>
